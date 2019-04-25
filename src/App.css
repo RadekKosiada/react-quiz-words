@@ -4,7 +4,7 @@ body {
 .App {
   /* text-align: center; */
   border: 1px solid grey;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   margin: 10px;
   background-color: white;
 }
@@ -28,7 +28,7 @@ body {
 }
 
 .button{
-  display: block;
+  display: inline-block;
   width: 120px;
   height: 50px;
   background-color: white;
@@ -46,5 +46,5 @@ body {
 .error-message {
   color: red;
   font-weight: 400;
-  
+
 }

@@ -1,0 +1,15 @@
+.game-over {
+  display: block;
+  width: 400px;
+  height: 350px;
+  z-index:10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0 0 -200px;
+  color: white;
+  text-align: center;
+  background-color: grey;
+  border: 3px solid white;
+  text-transform: uppercase;
+}

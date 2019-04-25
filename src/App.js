@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+import GameOverPopup from "./gameOverPopup";
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
       score: 0,
       errorMessage: "",
       round: 1,
+      showGameOverPopup: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,7 +69,8 @@ class App extends Component {
     } else {
       this.setState({
         score: 0,
-        round: this.state.round
+        round: this.state.round,
+        showGameOverPopup: true
       })
     }
   }
@@ -118,6 +121,9 @@ class App extends Component {
               <p>{this.state.score}</p>
             </div>
         </div>
+
+        {this.state.showGameOverPopup && (<GameOverPopup />)}
+
       </div>
     );
   }
