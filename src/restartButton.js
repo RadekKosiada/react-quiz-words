@@ -8,7 +8,7 @@ export default class RestartButton extends Component {
   render() {
     return (
       <div>
-        <button className="button" onClick={this.props.hideGameOverPopup}>Restart</button>
+        <button className="button" onClick={this.props.restartGamePopup}>Restart</button>
       </div>
     )    
   }

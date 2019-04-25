@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import GameOverPopup from "./gameOverPopup";
+import YouWonPopup from "./youWonPopup";
 
 class App extends Component {
   constructor(props) {
@@ -17,12 +18,14 @@ class App extends Component {
       score: 0,
       errorMessage: "",
       round: 1,
-      showGameOverPopup: false
+      showGameOverPopup: false,
+      showYouWonPopup: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.hideGameOverPopup = this.hideGameOverPopup.bind(this);
+    this.restartGame = this.restartGame.bind(this);
     this.getQuestion = this.getQuestion.bind(this);
+    this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
   }
   getQuestion() {
     axios
@@ -43,14 +46,21 @@ class App extends Component {
         console.log(err);
       });
   }
-  hideGameOverPopup() {
+  restartGame() {
+    console.log("fired")
     this.setState({
       showGameOverPopup: false,
+      showYouWonPopup: false,
       round: 1,
       score: 0,
       value: "",
     })
     this.getQuestion();
+  }
+  displayYouWonPopup() {
+    this.setState({
+      showYouWonPopup: true
+    })
   }
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -60,31 +70,39 @@ class App extends Component {
     event.preventDefault();
     if(!this.state.value) {
       this.setState({
-        errorMessage: "Please make sure you typed your answer correctly"
+        errorMessage: "*This is a required field"
       })
-    } else if(this.state.value === this.state.answer){
+    } else if(this.state.value === this.state.correctAnswer){
+      console.log("correct")
       //counting points if correct answer
       if(this.state.score === 0) {
         this.setState({
           score: +1,
-          round: 1+this.state.round,
+          round: 1+this.state.round,         
+          errorMessage: ""
       
         })
       } else {
         this.setState({
           score: 2*this.state.score,
-          round: 1+this.state.round     
+          round: 1+this.state.round,
+          errorMessage: ""
         })
       }
-      // this.state.value = "";
+      if(this.state.round === 30) {
+        this. displayYouWonPopup()
+      }
+      this.state.value = "";
       //triggering a new question
       this.getQuestion();
-      
+     
     } else {
       this.setState({
         score: 0,
         round: this.state.round,
-        showGameOverPopup: true
+        showGameOverPopup: true,
+        errorMessage: ""
+
       })
     }
   }
@@ -98,31 +116,38 @@ class App extends Component {
           <div className="grid-container">
           <p className="title">Round: </p>
             <p>{this.state.round}</p>
-            <p className="title">Category: </p>
-            <p>{this.state.category}</p>
-            <p className="title">Question: </p>
-            <p>{this.state.question}</p>
-
-            <form className="grid-form" onSubmit={this.handleSubmit}>
-              <label className="title">
-                Your answer: 
-                <p className="error-message">{this.state.errorMessage}</p>
-                <input type="text" name="answer" value={this.state.value} onChange={this.handleChange}/>
-                <p>{this.state.value}</p>
-              </label>
-              <input className="button" type="submit" value="Submit" />
-            </form>
-          </div>
-          <div className="grid-container">
+            
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
-            </div>
+         
+            <p className="title">Category: </p>
+            <p>{this.state.category}</p>
+            <p className="title">Question: </p>           
+            <p>{this.state.question}</p>
+            </div>           
+              <p className="error-message">{this.state.errorMessage}</p>
+            
+            <form className="grid-form" onSubmit={this.handleSubmit}>
+              {/* <label className="title">                */}
+                  Your answer:
+                <input type="text" name="answer" value={this.state.value} onChange={this.handleChange}/>
+                
+                {/* <p>{this.state.value}</p> */}
+              {/* </label> */}
+              <input className="button" type="submit" value="Submit" />
+            </form>
+                    
         </div>
 
         {this.state.showGameOverPopup && (<GameOverPopup 
-          hideGameOverPopup = {this.hideGameOverPopup}
-          valueFromApp={this.state.value}
+          restartGameApp = {this.restartGame}
+          valueFromApp = {this.state.value}
           correctAnswer = {this.state.correctAnswer}
+        />)}
+        
+        {this.state.showYouWonPopup && (<YouWonPopup 
+          restartGameApp = {this.restartGame}
+          scoreFromApp = {this.state.score}
         />)}
 
       </div>
