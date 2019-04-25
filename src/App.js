@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      answer: "",
+      correctAnswer: "",
       category: "",
       questionId: 0,
       question: "",
@@ -21,6 +21,36 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.hideGameOverPopup = this.hideGameOverPopup.bind(this);
+    this.getQuestion = this.getQuestion.bind(this);
+  }
+  getQuestion() {
+    axios
+      .get("http://jservice.io/api/random")
+      .then(res => {
+        console.log(res.data[0]);
+        const data = res.data[0];
+        this.setState({
+          correctAnswer: data.answer,
+          category: data.category.title,
+          questionId: data.id,
+          question: data.question,
+          questionValue: data.value,
+        });
+        console.log(this.state.answer)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  hideGameOverPopup() {
+    this.setState({
+      showGameOverPopup: false,
+      round: 1,
+      score: 0,
+      value: "",
+    })
+    this.getQuestion();
   }
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -32,9 +62,9 @@ class App extends Component {
       this.setState({
         errorMessage: "Please make sure you typed your answer correctly"
       })
-    } else if(this.state.value == this.state.answer){
+    } else if(this.state.value === this.state.answer){
       //counting points if correct answer
-      if(this.state.score ==0) {
+      if(this.state.score === 0) {
         this.setState({
           score: +1,
           round: 1+this.state.round,
@@ -46,25 +76,9 @@ class App extends Component {
           round: 1+this.state.round     
         })
       }
-      this.state.value = "";
+      // this.state.value = "";
       //triggering a new question
-      axios
-      .get("http://jservice.io/api/random")
-      .then(res => {
-        console.log(res.data[0]);
-        const data = res.data[0];
-        this.setState({
-          answer: data.answer,
-          category: data.category.title,
-          questionId: data.id,
-          question: data.question,
-          questionValue: data.value
-        });
-        console.log(this.state.answer)
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      this.getQuestion();
       
     } else {
       this.setState({
@@ -75,25 +89,8 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    axios
-      .get("http://jservice.io/api/random")
-      .then(res => {
-        console.log(res.data[0]);
-        const data = res.data[0];
-        this.setState({
-          answer: data.answer,
-          category: data.category.title,
-          questionId: data.id,
-          question: data.question,
-          questionValue: data.value
-        });
-        console.log(this.state.answer)
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.getQuestion();
   }
-
   render() {
     return (
       <div className="App">
@@ -122,7 +119,11 @@ class App extends Component {
             </div>
         </div>
 
-        {this.state.showGameOverPopup && (<GameOverPopup />)}
+        {this.state.showGameOverPopup && (<GameOverPopup 
+          hideGameOverPopup = {this.hideGameOverPopup}
+          valueFromApp={this.state.value}
+          correctAnswer = {this.state.correctAnswer}
+        />)}
 
       </div>
     );

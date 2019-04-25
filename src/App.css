@@ -7,6 +7,7 @@ body {
   /* border-radius: 15px; */
   margin: 10px;
   background-color: white;
+  font-family: monospace;
 }
 
 .quiz-container {
