@@ -37,7 +37,7 @@ class App extends Component {
           question: data.question,
           questionValue: data.value,
         });
-        console.log(this.state.answer)
+        console.log(this.state.correctAnswer)
       })
       .catch(err => {
         console.log(err);
