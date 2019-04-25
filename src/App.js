@@ -15,7 +15,7 @@ class App extends Component {
       value: "",
       score: 0,
       errorMessage: "",
-      round: 0,
+      round: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,24 +24,45 @@ class App extends Component {
     this.setState({value: event.target.value});
   }
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    console.log('A name was submitted: ' + this.state.value);
     event.preventDefault();
     if(!this.state.value) {
       this.setState({
-        errorMessage: "Please make sure you entered your answer"
+        errorMessage: "Please make sure you typed your answer correctly"
       })
     } else if(this.state.value == this.state.answer){
+      //counting points if correct answer
       if(this.state.score ==0) {
         this.setState({
           score: +1,
-          round: +1
+          round: 1+this.state.round,
+      
         })
       } else {
         this.setState({
           score: 2*this.state.score,
-          round: +1        
+          round: 1+this.state.round     
         })
       }
+      this.state.value = "";
+      //triggering a new question
+      axios
+      .get("http://jservice.io/api/random")
+      .then(res => {
+        console.log(res.data[0]);
+        const data = res.data[0];
+        this.setState({
+          answer: data.answer,
+          category: data.category.title,
+          questionId: data.id,
+          question: data.question,
+          questionValue: data.value
+        });
+        console.log(this.state.answer)
+      })
+      .catch(err => {
+        console.log(err);
+      });
       
     } else {
       this.setState({
@@ -55,9 +76,7 @@ class App extends Component {
       .get("http://jservice.io/api/random")
       .then(res => {
         console.log(res.data[0]);
-
         const data = res.data[0];
-
         this.setState({
           answer: data.answer,
           category: data.category.title,
