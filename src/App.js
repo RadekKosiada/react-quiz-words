@@ -12,17 +12,39 @@ class App extends Component {
       questionId: 0,
       question: "",
       questionValue: 0,
-      value: ""
+      value: "",
+      score: 0,
+      errorMessage: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-    this.setState({value: event.target.value.toUpperCase()});
+    this.setState({value: event.target.value});
   }
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    if(!this.state.value) {
+      this.setState({
+        errorMessage: "Please make sure you entered your answer"
+      })
+    } else if(this.state.value == this.state.answer){
+      if(this.state.score ==0) {
+        this.setState({
+          score: +1
+        })
+      } else {
+        this.setState({
+          score: 2*this.state.score
+        })
+      }
+      
+    } else {
+      this.setState({
+        score: 0
+      })
+    }
   }
   componentDidMount() {
     axios
@@ -39,6 +61,7 @@ class App extends Component {
           question: data.question,
           questionValue: data.value
         });
+        console.log(this.state.answer)
       })
       .catch(err => {
         console.log(err);
@@ -58,12 +81,17 @@ class App extends Component {
             <form className="grid-form" onSubmit={this.handleSubmit}>
               <label className="title">
                 Your answer: 
+                <p className="error-message">{this.state.errorMessage}</p>
                 <input type="text" name="answer" value={this.state.value} onChange={this.handleChange}/>
                 <p>{this.state.value}</p>
               </label>
-              <input type="submit" value="Submit" />
+              <input className="button" type="submit" value="Submit" />
             </form>
           </div>
+          <div className="grid-container">
+              <p className="title">Your score: </p>
+              <p>{this.state.score}</p>
+            </div>
         </div>
       </div>
     );
