@@ -15,6 +15,7 @@ class App extends Component {
       value: "",
       score: 0,
       errorMessage: "",
+      round: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,17 +33,20 @@ class App extends Component {
     } else if(this.state.value == this.state.answer){
       if(this.state.score ==0) {
         this.setState({
-          score: +1
+          score: +1,
+          round: +1
         })
       } else {
         this.setState({
-          score: 2*this.state.score
+          score: 2*this.state.score,
+          round: +1        
         })
       }
       
     } else {
       this.setState({
-        score: 0
+        score: 0,
+        round: this.state.round
       })
     }
   }
@@ -73,6 +77,8 @@ class App extends Component {
       <div className="App">
         <div className="quiz-container">
           <div className="grid-container">
+          <p className="title">Round: </p>
+            <p>{this.state.round}</p>
             <p className="title">Category: </p>
             <p>{this.state.category}</p>
             <p className="title">Question: </p>
