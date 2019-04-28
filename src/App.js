@@ -72,7 +72,7 @@ class App extends Component {
       this.setState({
         errorMessage: "*This is a required field"
       })
-    } else if(this.state.value === this.state.correctAnswer){
+    } else if(this.state.value.toLowerCase() === this.state.correctAnswer.toLowerCase()){
       console.log("correct")
       //counting points if correct answer
       if(this.state.score === 0) {
