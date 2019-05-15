@@ -21,13 +21,16 @@ class App extends Component {
       errorMessage: "",
       round: 1,
       showGameOverPopup: false,
-      showYouWonPopup: false
+      showYouWonPopup: false,
+      time: 10,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
     this.getQuestion = this.getQuestion.bind(this);
     this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
+    this.countTime = this.countTime.bind(this);
+    // this.interval = this.interval.bind(this);
   }
   getQuestion() {
     axios
@@ -85,7 +88,8 @@ class App extends Component {
       this.setState({
         currentRoundPoints: 2 * this.state.currentRoundPoints,
         round: 1 + this.state.round,
-        errorMessage: ""
+        errorMessage: "",
+        time: 14
       });
       if (this.state.score === 0) {
         this.setState({
@@ -113,14 +117,28 @@ class App extends Component {
       });
     }
   }
+  countTime() {
+    setInterval(() => {
+      this.setState({
+        time: this.state.time -1
+      })
+      console.log(this.state.time)
+      if(this.state.time ==0) {
+       this.setState({
+        showGameOverPopup: true,
+       })
+      } 
+    }, 1000); 
+  }
   componentDidMount() {
     this.getQuestion();
+    this.countTime();
   }
   render() {
     return (
       <div className="App">
         <div className="main-container">
-          <div class="quiz-container">
+          <div className="quiz-container">
             <div className="questions-container">
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
@@ -152,7 +170,7 @@ class App extends Component {
               <input className="button" type="submit" value="Submit" />
             </form>
           </div>
-          <Timer />
+          <Timer timeApp={this.state.time}/>
         </div>
        
 

@@ -14,6 +14,7 @@ body {
   display: grid; 
   /* grid for the quiz & clock */
   grid-template-columns: 1fr 20vw;
+  position: relative;
 }
 
 .quiz-container {
@@ -25,17 +26,8 @@ body {
 
 .questions-container {
   display: grid; 
-  /* grid for the quiz & clock */
+  /* grid for the questions, points, score etc. */
   grid-template-columns: 20vw 1fr;
-}
-
-#timer {
-  border: 1px solid blue;
-  display: block;
-  width: 15vw;
-  height: 15vw;
-  text-align: center;
-  
 }
 
 .grid-form {
