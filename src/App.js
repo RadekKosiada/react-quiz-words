@@ -148,7 +148,7 @@ class App extends Component {
               <p>{this.state.round}</p>
 
               <p className="title">Points for the current round: </p>
-              <p>{this.state.currentRoundPoints}</p>
+              <p className="current-points">{this.state.currentRoundPoints}</p>
 
               <p className="title">Questions left to win: </p>
               <p>{this.state.winCondition}</p>
