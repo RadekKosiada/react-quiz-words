@@ -22,7 +22,7 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 10,
+      time: 3,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -118,12 +118,13 @@ class App extends Component {
     }
   }
   countTime() {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.setState({
         time: this.state.time -1
       })
       console.log(this.state.time)
       if(this.state.time ==0) {
+        clearInterval(this.interval);
        this.setState({
         showGameOverPopup: true,
        })
