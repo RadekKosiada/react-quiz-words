@@ -9,16 +9,17 @@ export default class YouWonPopup extends Component {
   }
   render() {
     return (
-      <div className="overlay">
+      <div>
+        <div className="overlay" />
         <div className="game-over">
           <h4>Congrats, you Won!</h4>
           <p>Your score counts {this.props.scoreFromApp}</p>
-          <RestartButton restartGamePopup = {this.props.restartGameApp}/>
+          <RestartButton restartGamePopup={this.props.restartGameApp} />
         </div>
-    </div>
-    )    
+      </div>
+    );
   }
-} 
+}
 
 // hide/show
 // Restart button logiC??

@@ -20,10 +20,9 @@
   margin: -250px 0 0 -200px;
   color: white;
   text-align: center;
-  background-color: grey;
+  background-color: rgb(159, 159, 159);
   border: 3px solid white;
   text-transform: uppercase;
-  opacity: 1;
   font-size: 25px;
   padding: 0 10px;
 }

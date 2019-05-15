@@ -22,7 +22,7 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 5,
+      time: 15,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,7 +59,7 @@ class App extends Component {
       round: 1,
       score: 0,
       value: "",
-      time: 5
+      time: 15
     });
     this.getQuestion();
     this.countTime();
@@ -91,7 +91,7 @@ class App extends Component {
         currentRoundPoints: 2 * this.state.currentRoundPoints,
         round: 1 + this.state.round,
         errorMessage: "",
-        time: 14
+        time: 15
       });
       if (this.state.score === 0) {
         this.setState({
@@ -124,11 +124,10 @@ class App extends Component {
       this.setState({
         time: this.state.time -1
       })
-      console.log(this.state.time)
       if(this.state.time ==0) {
         clearInterval(this.interval);
        this.setState({
-        showGameOverPopup: true,
+        showGameOverPopup: true
        })
       } 
     }, 1000); 
@@ -159,17 +158,14 @@ class App extends Component {
             </div>
             <p className="error-message">{this.state.errorMessage}</p>
 
-            <form className="grid-form" onSubmit={this.handleSubmit}>
-              {/* <label className="title">                */}
+            <form className="grid-form" onSubmit={this.handleSubmit}>           
               Your answer:
               <input
                 type="text"
                 name="answer"
                 value={this.state.value}
                 onChange={this.handleChange}
-              />
-              {/* <p>{this.state.value}</p> */}
-              {/* </label> */}
+              />            
               <input className="button" type="submit" value="Submit" />
             </form>
           </div>

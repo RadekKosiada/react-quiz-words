@@ -9,14 +9,21 @@ export default class GameOverPopup extends Component {
   }
   render() {
     return (
-      <div className="overlay">
+      <div>
+        <div className="overlay" />
         <div className="game-over">
           <h4>Game Over</h4>
-          <p><span className="title">{this.props.valueFromApp}</span> is a wrong answer!</p>
-          <p>The correct one is: <span className="title">{this.props.correctAnswer}</span></p>
-          <RestartButton restartGamePopup = {this.props.restartGameApp}/>
+          <p>
+            <span className="title">{this.props.valueFromApp}</span> is a wrong
+            answer!
+          </p>
+          <p>
+            The correct one is:{" "}
+            <span className="title">{this.props.correctAnswer}</span>
+          </p>
+          <RestartButton restartGamePopup={this.props.restartGameApp} />
         </div>
-    </div>
-    )    
+      </div>
+    );
   }
-} 
+}
