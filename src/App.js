@@ -22,7 +22,7 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 3,
+      time: 5,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +30,7 @@ class App extends Component {
     this.getQuestion = this.getQuestion.bind(this);
     this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
-    // this.interval = this.interval.bind(this);
+
   }
   getQuestion() {
     axios
@@ -58,9 +58,11 @@ class App extends Component {
       showYouWonPopup: false,
       round: 1,
       score: 0,
-      value: ""
+      value: "",
+      time: 5
     });
     this.getQuestion();
+    this.countTime();
   }
   displayYouWonPopup() {
     this.setState({
