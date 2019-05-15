@@ -23,6 +23,7 @@ class App extends Component {
       showGameOverPopup: false,
       showYouWonPopup: false,
       time: 15,
+      winCondition: 10
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -91,7 +92,8 @@ class App extends Component {
         currentRoundPoints: 2 * this.state.currentRoundPoints,
         round: 1 + this.state.round,
         errorMessage: "",
-        time: 15
+        time: 15,
+        winCondition: this.state.winCondition-1
       });
       if (this.state.score === 0) {
         this.setState({
@@ -103,7 +105,7 @@ class App extends Component {
         });
       }
       //triggering popup after 30 correct answers
-      if (this.state.round === 30) {
+      if (this.state.round > this.state.winCondition) {
         this.displayYouWonPopup();
       }
       this.state.value = "";
@@ -147,6 +149,9 @@ class App extends Component {
 
               <p className="title">Points for the current round: </p>
               <p>{this.state.currentRoundPoints}</p>
+
+              <p className="title">Questions left to win: </p>
+              <p>{this.state.winCondition}</p>
 
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
