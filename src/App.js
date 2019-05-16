@@ -23,7 +23,8 @@ class App extends Component {
       showGameOverPopup: false,
       showYouWonPopup: false,
       time: 15,
-      winCondition: 2
+      winCondition: 2,
+      answeredQuestions: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,7 +62,8 @@ class App extends Component {
       score: 0,
       value: "",
       time: 15,
-      currentRoundPoints: 1
+      currentRoundPoints: 1,
+      answeredQuestions: 0
     });
     this.getQuestion();
     this.countTime();
@@ -89,12 +91,12 @@ class App extends Component {
         .toLowerCase()
         .includes(this.state.value.toLowerCase())
     ) {
-      console.log("correct");
+      console.log("correct", this.state.answeredQuestions);
       this.setState({
-        currentRoundPoints: 2 * this.state.currentRoundPoints,
-        round: 1 + this.state.round,
+        currentRoundPoints: this.state.currentRoundPoints * 2,
+        round: this.state.round + 1,
         errorMessage: "",
-        winCondition: this.state.winCondition-1
+        answeredQuestions:this.state.answeredQuestions + 1
       });
       if (this.state.score === 0) {
         this.setState({
@@ -105,11 +107,14 @@ class App extends Component {
           score: 2 * this.state.score
         });
       }
-      //triggering popup after 30 correct answers
-      if (this.state.round > this.state.winCondition) {
+      //triggering popup after correctly answering required number of questions
+      if (this.state.round == this.state.winCondition) {
+        console.log("YOU WON!!!")
         this.displayYouWonPopup();
       }
-      this.state.value = "";
+      this.setState({
+        value: "", 
+      })
       //triggering a new question
       this.getQuestion();
       //  resetting all to 0 if wrong answer
@@ -119,6 +124,7 @@ class App extends Component {
         round: this.state.round,
         showGameOverPopup: true,
         errorMessage: "",
+        answeredQuestions: 0
       });
       clearInterval(this.interval);
     }
@@ -153,7 +159,7 @@ class App extends Component {
               <p className="current-points">{this.state.currentRoundPoints}</p>
 
               <p className="title">Questions left to win: </p>
-              <p>{this.state.winCondition}</p>
+              <p>{this.state.winCondition - this.state.answeredQuestions}</p>
 
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
