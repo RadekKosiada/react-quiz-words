@@ -23,7 +23,7 @@ class App extends Component {
       showGameOverPopup: false,
       showYouWonPopup: false,
       time: 15,
-      winCondition: 10
+      winCondition: 2
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -69,8 +69,8 @@ class App extends Component {
   displayYouWonPopup() {
     this.setState({
       showYouWonPopup: true,
-      time: 0
     });
+    clearInterval(this.interval);
   }
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -94,7 +94,6 @@ class App extends Component {
         currentRoundPoints: 2 * this.state.currentRoundPoints,
         round: 1 + this.state.round,
         errorMessage: "",
-        time: 15,
         winCondition: this.state.winCondition-1
       });
       if (this.state.score === 0) {
