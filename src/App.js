@@ -68,7 +68,8 @@ class App extends Component {
   }
   displayYouWonPopup() {
     this.setState({
-      showYouWonPopup: true
+      showYouWonPopup: true,
+      time: 0
     });
   }
   handleChange(event) {
@@ -118,8 +119,9 @@ class App extends Component {
         score: 0,
         round: this.state.round,
         showGameOverPopup: true,
-        errorMessage: ""
+        errorMessage: "",
       });
+      clearInterval(this.interval);
     }
   }
   countTime() {
