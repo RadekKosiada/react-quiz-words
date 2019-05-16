@@ -60,7 +60,8 @@ class App extends Component {
       round: 1,
       score: 0,
       value: "",
-      time: 15
+      time: 15,
+      currentRoundPoints: 1
     });
     this.getQuestion();
     this.countTime();
