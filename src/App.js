@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      allQuestions: [],
       correctAnswer: "",
       category: "",
       questionId: 0,
@@ -36,21 +36,17 @@ class App extends Component {
 
   }
   getQuestion() {
-    axios
-      
+    axios      
       .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
         //needs to change this to render 
-        console.log(res.data[0]);
-        const data = res.data[0];
+        console.log(res.data);
+        const data = res.data;
         this.setState({
-          correctAnswer: data.answer,
-          category: data.category.title,
-          questionId: data.id,
-          question: data.question,
-          questionValue: data.value
+          allQuestions: data
         });
         console.log(this.state.correctAnswer);
+        
       })
       .catch(err => {
         console.log(err);
@@ -150,60 +146,71 @@ class App extends Component {
     this.countTime();
   }
   render() {
-    return (
-      <div className="App">
-        <div className="main-container">
-          <div className="quiz-container">
-            <div className="questions-container">
-              <p className="title">Round: </p>
-              <p>{this.state.round}</p>
-
-              <p className="title">Points for the current round: </p>
-              <p className="current-points">{this.state.currentRoundPoints}</p>
-
-              <p className="title">Questions left to win: </p>
-              <p>{this.state.winCondition - this.state.answeredQuestions}</p>
-
-              <p className="title">Your score: </p>
-              <p>{this.state.score}</p>
-
-              <p className="title">Category: </p>
-              <p>{this.state.category}</p>
-              <p className="title">Question: </p>
-              <p>{this.state.question}</p>
+    const currentQuestion = this.state.allQuestions[this.state.round -1];
+    
+    // if (currentQuestion) {
+      return (
+        <div className="App">
+          <div className="main-container">
+            <div className="quiz-container">
+              <div className="questions-container">
+                <p className="title">Round: </p>
+                <p>{this.state.round}</p>
+  
+                <p className="title">Points for the current round: </p>
+                <p className="current-points">{this.state.currentRoundPoints}</p>
+  
+                <p className="title">Questions left to win: </p>
+                <p>{this.state.winCondition - this.state.answeredQuestions}</p>
+  
+                <p className="title">Your score: </p>
+                <p>{this.state.score}</p>           
+                
+                <p className="title">Category: </p>
+                {currentQuestion && (<p>{currentQuestion.category.title}</p>)}            
+  
+                <p className="title">Question: </p>
+                {currentQuestion && (<p>{currentQuestion.question}</p>)}     
+                
+              </div>
+              <p className="error-message">{this.state.errorMessage}</p>
+  
+              <form className="grid-form" onSubmit={this.handleSubmit}>           
+                Your answer:
+                <input
+                  type="text"
+                  name="answer"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                />            
+                <input className="button" type="submit" value="Submit" />
+              </form>
             </div>
-            <p className="error-message">{this.state.errorMessage}</p>
-
-            <form className="grid-form" onSubmit={this.handleSubmit}>           
-              Your answer:
-              <input
-                type="text"
-                name="answer"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />            
-              <input className="button" type="submit" value="Submit" />
-            </form>
+            <Timer timeApp={this.state.time}/>
           </div>
-          <Timer timeApp={this.state.time}/>
+         
+          {this.state.showGameOverPopup && (
+            <GameOverPopup
+              restartGameApp={this.restartGame}
+              valueFromApp={this.state.value}
+              correctAnswer={this.state.correctAnswer}
+            />
+          )}
+  
+          {this.state.showYouWonPopup && (
+            <YouWonPopup
+              restartGameApp={this.restartGame}
+              scoreFromApp={this.state.score}
+            />
+          )}
         </div>
-       
-        {this.state.showGameOverPopup && (
-          <GameOverPopup
-            restartGameApp={this.restartGame}
-            valueFromApp={this.state.value}
-            correctAnswer={this.state.correctAnswer}
-          />
-        )}
-
-        {this.state.showYouWonPopup && (
-          <YouWonPopup
-            restartGameApp={this.restartGame}
-            scoreFromApp={this.state.score}
-          />
-        )}
-      </div>
-    );
+      );
+    // } else {
+    //   return (
+    //     <div>Question is loading!</div>
+    //   )
+    // }
+    
   }
 }
 
