@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
       correctAnswer: "",
       category: "",
       questionId: 0,
@@ -23,7 +24,7 @@ class App extends Component {
       showGameOverPopup: false,
       showYouWonPopup: false,
       time: 15,
-      winCondition: 2,
+      winCondition: 5,
       answeredQuestions: 0
     };
     this.handleChange = this.handleChange.bind(this);
@@ -36,8 +37,10 @@ class App extends Component {
   }
   getQuestion() {
     axios
-      .get("http://jservice.io/api/random")
+      .get("http://jservice.io/api/random/")
+      // .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
+        //needs to change this to render 
         console.log(res.data[0]);
         const data = res.data[0];
         this.setState({
@@ -185,7 +188,6 @@ class App extends Component {
           <Timer timeApp={this.state.time}/>
         </div>
        
-
         {this.state.showGameOverPopup && (
           <GameOverPopup
             restartGameApp={this.restartGame}
