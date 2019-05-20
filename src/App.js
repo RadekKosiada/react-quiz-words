@@ -47,6 +47,9 @@ class App extends Component {
         });
         console.log(this.state.correctAnswer);
         
+          for(let i =0; i < data.length; i++ ) {
+            console.log( data[i].answer)
+          }
       })
       .catch(err => {
         console.log(err);
@@ -77,6 +80,7 @@ class App extends Component {
     this.setState({ value: event.target.value });
   }
   handleSubmit(event) {
+    const currentQuestion = this.state.allQuestions[this.state.round -1];
     console.log("A name was submitted: " + this.state.value);
     event.preventDefault();
     //if no answer
@@ -86,7 +90,7 @@ class App extends Component {
       });
       //if correct answer
     } else if (
-      this.state.correctAnswer
+      currentQuestion.answer
         .toLowerCase()
         .includes(this.state.value.toLowerCase())
     ) {
@@ -114,8 +118,6 @@ class App extends Component {
       this.setState({
         value: "", 
       })
-      //triggering a new question
-      this.getQuestion();
       //  resetting all to 0 if wrong answer
     } else {
       this.setState({
