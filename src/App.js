@@ -37,8 +37,8 @@ class App extends Component {
   }
   getQuestion() {
     axios
-      .get("http://jservice.io/api/random/")
-      // .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
+      
+      .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
         //needs to change this to render 
         console.log(res.data[0]);
