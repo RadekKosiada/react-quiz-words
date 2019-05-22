@@ -79,7 +79,7 @@ class App extends Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
-  handleSubmit(event) {
+  handleSubmit(event) {   
     const currentQuestion = this.state.allQuestions[this.state.round -1];
     console.log("A name was submitted: " + this.state.value);
     event.preventDefault();
@@ -99,7 +99,8 @@ class App extends Component {
         currentRoundPoints: this.state.currentRoundPoints * 2,
         round: this.state.round + 1,
         errorMessage: "",
-        answeredQuestions:this.state.answeredQuestions + 1
+        answeredQuestions:this.state.answeredQuestions + 1,
+        time: 15
       });
       if (this.state.score === 0) {
         this.setState({
@@ -111,7 +112,7 @@ class App extends Component {
         });
       }
       //triggering popup after correctly answering required number of questions
-      if (this.state.round == this.state.winCondition) {
+      if (this.state.round === this.state.winCondition) {
         console.log("YOU WON!!!")
         this.displayYouWonPopup();
       }
@@ -135,7 +136,7 @@ class App extends Component {
       this.setState({
         time: this.state.time -1
       })
-      if(this.state.time ==0) {
+      if(this.state.time === 0) {
         clearInterval(this.interval);
        this.setState({
         showGameOverPopup: true
