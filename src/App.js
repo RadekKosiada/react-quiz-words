@@ -25,7 +25,7 @@ class App extends Component {
       showYouWonPopup: false,
       time: 15,
       winCondition: 5,
-      answeredQuestions: 0
+      answeredQuestions: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -139,7 +139,8 @@ class App extends Component {
       if(this.state.time === 0) {
         clearInterval(this.interval);
        this.setState({
-        showGameOverPopup: true
+        showGameOverPopup: true,
+
        })
       } 
     }, 1000); 
@@ -196,7 +197,8 @@ class App extends Component {
             <GameOverPopup
               restartGameApp={this.restartGame}
               valueFromApp={this.state.value}
-              correctAnswer={this.state.correctAnswer}
+              correctAnswer={currentQuestion.answer}
+              timeApp={this.state.time}
             />
           )}
   

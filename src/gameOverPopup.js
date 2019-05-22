@@ -13,12 +13,10 @@ export default class GameOverPopup extends Component {
         <div className="overlay" />
         <div className="game-over">
           <h4>Game Over</h4>
+          {this.props.valueFromApp && (<p><span className="title">{this.props.valueFromApp}</span> is wrong!</p>)}
+          {this.props.timeApp===0 && (<p><span className="title">{this.props.valueFromApp}</span>Too late!</p>)}
           <p>
-            <span className="title">{this.props.valueFromApp}</span> is a wrong
-            answer!
-          </p>
-          <p>
-            The correct one is:{" "}
+            The correct answer is:
             <span className="title">{this.props.correctAnswer}</span>
           </p>
           <RestartButton restartGamePopup={this.props.restartGameApp} />
