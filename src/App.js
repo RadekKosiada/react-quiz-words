@@ -40,7 +40,6 @@ class App extends Component {
       .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
         //needs to change this to render 
-        console.log(res.data);
         const data = res.data;
         this.setState({
           allQuestions: data
@@ -113,7 +112,6 @@ class App extends Component {
       }
       //triggering popup after correctly answering required number of questions
       if (this.state.round === this.state.winCondition) {
-        console.log("YOU WON!!!")
         this.displayYouWonPopup();
       }
       this.setState({

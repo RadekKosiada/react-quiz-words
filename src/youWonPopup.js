@@ -4,9 +4,6 @@ import RestartButton from "./restartButton";
 import "./App.css";
 
 export default class YouWonPopup extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>
@@ -20,6 +17,3 @@ export default class YouWonPopup extends Component {
     );
   }
 }
-
-// hide/show
-// Restart button logiC??

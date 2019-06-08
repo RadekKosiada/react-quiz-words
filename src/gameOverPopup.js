@@ -4,9 +4,6 @@ import RestartButton from "./restartButton";
 import "./App.css";
 
 export default class GameOverPopup extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>
