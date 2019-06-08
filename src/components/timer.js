@@ -1,6 +1,6 @@
 import React from "react";
 import "./timer.css";
-import "./App.css";
+import "../App.css";
 
 export default function Timer(props) {
   return (

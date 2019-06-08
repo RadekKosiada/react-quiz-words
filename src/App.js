@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import GameOverPopup from "./gameOverPopup";
-import YouWonPopup from "./youWonPopup";
-import Timer from "./timer";
+import GameOverPopup from "./components/gameOverPopup";
+import YouWonPopup from "./components/youWonPopup";
+import Timer from "./components/timer";
 
 class App extends Component {
   constructor(props) {

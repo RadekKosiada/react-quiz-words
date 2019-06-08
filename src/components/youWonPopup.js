@@ -1,7 +1,7 @@
 import React from "react";
 import "./gameOverPopup.css";
 import RestartButton from "./restartButton";
-import "./App.css";
+import "../App.css";
 
 export default function YouWonPopup(props) {
   return (
