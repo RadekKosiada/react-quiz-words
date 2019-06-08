@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+import Question from "./components/question";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import Timer from "./components/timer";
@@ -23,7 +24,7 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 15,
+      time: 60,
       winCondition: 5,
       answeredQuestions: 0,
     };
@@ -155,10 +156,12 @@ class App extends Component {
         <div className="App">
           <div className="main-container">
             <div className="quiz-container">
+             
               <div className="questions-container">
+             
                 <p className="title">Round: </p>
                 <p>{this.state.round}</p>
-  
+                
                 <p className="title">Points for the current round: </p>
                 <p className="current-points">{this.state.currentRoundPoints}</p>
   
@@ -176,7 +179,7 @@ class App extends Component {
                 
               </div>
               <p className="error-message">{this.state.errorMessage}</p>
-  
+              <Question />
               <form className="grid-form" onSubmit={this.handleSubmit}>           
                 Your answer:
                 <input
@@ -187,6 +190,7 @@ class App extends Component {
                 />            
                 <input className="button" type="submit" value="Submit" />
               </form>
+             
             </div>
             <Timer timeApp={this.state.time}/>
           </div>
