@@ -7,22 +7,20 @@ export default class Question extends Component {
     super(props);
     this.state = {
       allQuestions: [],
-      correctAnswer: ""
+      correctAnswer: "",
+      winCondition: 5
     };
-    this.getQuestion = this.getQuestion.bind(this);
+    this.fetchQuestion = this.fetchQuestion.bind(this);
   }
-  getQuestion() {
+  componentWillMount() {
+    this.fetchQuestion();
+  }
+  fetchQuestion = () => {
     axios
       .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
-        //needs to change this to render
-        const data = res.data;
-        this.setState({
-          allQuestions: data
-        });
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i].answer);
-        }
+        const questions = res.data;
+        this.props.getQuestions(questions);
       })
       .catch(err => {
         console.log(err);
