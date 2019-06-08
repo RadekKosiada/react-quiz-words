@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 
-export default class RestartButton extends Component {
-  render() {
-    return (
-      <div>
-        <button className="button" onClick={this.props.restartGamePopup}>Restart</button>
-      </div>
-    )    
-  }
+export default function RestartButton(props) {
+  return (
+    <div>
+      <button className="button" onClick={props.restartGamePopup}>
+        Restart
+      </button>
+    </div>
+  );
 }

@@ -1,24 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import "./gameOverPopup.css";
 import RestartButton from "./restartButton";
 import "./App.css";
 
-export default class GameOverPopup extends Component {
-  render() {
-    return (
-      <div>
-        <div className="overlay" />
-        <div className="game-over">
-          <h4>Game Over</h4>
-          {this.props.valueFromApp && (<p><span className="title">{this.props.valueFromApp}</span> is wrong!</p>)}
-          {this.props.timeApp===0 && (<p><span className="title">{this.props.valueFromApp}</span>Too late!</p>)}
+export default function GameOverPopup(props) {
+  return (
+    <div>
+      <div className="overlay" />
+      <div className="game-over">
+        <h4>Game Over</h4>
+        {props.valueFromApp && (
           <p>
-            The correct answer is:
-            <span className="title">{this.props.correctAnswer}</span>
+            <span className="title">{props.valueFromApp}</span> is wrong!
           </p>
-          <RestartButton restartGamePopup={this.props.restartGameApp} />
-        </div>
+        )}
+        {props.timeApp === 0 && (
+          <p>
+            <span className="title">{props.valueFromApp}</span>Too late!
+          </p>
+        )}
+        <p>
+          The correct answer is:
+          <span className="title">{props.correctAnswer}</span>
+        </p>
+        <RestartButton restartGamePopup={props.restartGameApp} />
       </div>
-    );
-  }
+    </div>
+  );
 }
