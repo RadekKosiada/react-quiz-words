@@ -209,13 +209,7 @@ class App extends Component {
             />
           )}
         </div>
-      );
-    // } else {
-    //   return (
-    //     <div>Question is loading!</div>
-    //   )
-    // }
-    
+      ); 
   }
 }
 
