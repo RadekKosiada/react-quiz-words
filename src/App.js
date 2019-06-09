@@ -151,7 +151,10 @@ class App extends Component {
   }
   render() {
     const currentQuestion = this.state.allQuestions[this.state.round - 1];
-
+    let alert = '';
+    if (this.state.errorMessage) {
+      alert = 'input-alert';
+    }
     // if (currentQuestion) {
     return (
       <div className="App">
@@ -183,6 +186,7 @@ class App extends Component {
               <input
                 type="text"
                 name="answer"
+                className={alert}
                 value={this.state.value}
                 onChange={this.handleChange}
               />

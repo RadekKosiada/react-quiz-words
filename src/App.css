@@ -74,6 +74,10 @@ input[type=submit] {
   font-size: 15px;
 }
 
+.input-alert {
+  background-color: rgba(255,0,0,0.5);
+}
+
 #blue-circle {
   background-color: blue;
   border-radius: 50%;
