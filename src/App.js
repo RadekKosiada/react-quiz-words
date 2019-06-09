@@ -182,7 +182,7 @@ class App extends Component {
             <p className="error-message">{this.state.errorMessage}</p>
             {/* <Question getQuestions={this.getQuestions} /> */}
             <form className="grid-form" onSubmit={this.handleSubmit}>
-              Your answer:
+              <span className="title">Your answer:</span>
               <input
                 type="text"
                 name="answer"
