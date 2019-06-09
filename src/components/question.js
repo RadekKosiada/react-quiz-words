@@ -12,9 +12,9 @@ export default class Question extends Component {
     };
     this.fetchQuestion = this.fetchQuestion.bind(this);
   }
-  componentWillMount() {
-    this.fetchQuestion();
-  }
+  // componentWillMount() {
+  //   this.fetchQuestion();
+  // }
   fetchQuestion = () => {
     axios
       .get("http://jservice.io/api/random/?count=" + this.state.winCondition)

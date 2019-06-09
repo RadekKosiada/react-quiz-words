@@ -1,7 +1,7 @@
 // Ctrl Shift F
 import React, { Component } from "react";
+import axios from "axios";
 import "./App.css";
-import Question from "./components/question";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import Timer from "./components/timer";
@@ -30,20 +30,32 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
-    this.getQuestions = this.getQuestions.bind(this);
+    this.getQuestion = this.getQuestion.bind(this);
     this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
   }
   componentWillMount() {
     this.countTime();
+    this.getQuestion();
   }
-  getQuestions = questions => {
-    console.log("fired!");
-    this.setState({
-      allQuestions: questions
-    });
-    console.log(this.state.allQuestions);
-  };
+  getQuestion() {
+    axios
+      .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
+      .then(res => {
+        //needs to change this to render
+        const data = res.data;
+        this.setState({
+          allQuestions: data
+        });
+        console.log(this.state.correctAnswer);
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i].answer);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   restartGame() {
     console.log("fired");
     this.setState({
@@ -69,6 +81,7 @@ class App extends Component {
     this.setState({ value: event.target.value });
   }
   handleSubmit(event) {
+    console.log(this.state.allQuestions, this.state.round);
     const currentQuestion = this.state.allQuestions[this.state.round - 1];
     console.log("A name was submitted: " + this.state.value);
     event.preventDefault();
@@ -160,7 +173,7 @@ class App extends Component {
               {currentQuestion && <p>{currentQuestion.question}</p>}
             </div>
             <p className="error-message">{this.state.errorMessage}</p>
-            <Question getQuestions={this.getQuestions} />
+            {/* <Question getQuestions={this.getQuestions} /> */}
             <form className="grid-form" onSubmit={this.handleSubmit}>
               Your answer:
               <input
@@ -192,6 +205,14 @@ class App extends Component {
         )}
       </div>
     );
+    // } else {
+    //   return (
+    //     <div>Loading....
+    //     <Question getQuestions={this.getQuestions} />
+    //     </div>
+    //   )
+
+    // }
   }
 }
 
