@@ -66,7 +66,8 @@ class App extends Component {
       value: "",
       time: 15,
       currentRoundPoints: 1,
-      answeredQuestions: 0
+      answeredQuestions: 0,
+      errorMessage: ""
     });
     this.getQuestion();
     this.countTime();
@@ -78,7 +79,10 @@ class App extends Component {
     clearInterval(this.interval);
   }
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ 
+      value: event.target.value,
+      errorMessage: ""
+     });
   }
   handleSubmit(event) {
     console.log(this.state.allQuestions, this.state.round);

@@ -3,6 +3,7 @@ body {
 }
 .App {
   /* border: 1px solid grey; */
+  min-width: 740px;
   margin: 10px;
   background-color:rgba(255,255,255, 0.9);
   font-family: monospace;
@@ -13,14 +14,12 @@ body {
   display: grid;    
   /* grid for the quiz & clock */
   grid-template-columns: 1fr 20vw;
-  position: relative;
+  /* position: relative; */
 }
 
 .quiz-container {
   padding: 10px 30px;
-  display: grid;
   /* grid for questions & submit form */
-  grid-template-columns: 1fr 20vw;
 }
 
 .questions-container {
