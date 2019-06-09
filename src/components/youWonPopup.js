@@ -1,5 +1,5 @@
 import React from "react";
-import "./gameOverPopup.css";
+import "./youWonPopup.css";
 import RestartButton from "./restartButton";
 import "../App.css";
 
