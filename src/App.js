@@ -64,7 +64,7 @@ class App extends Component {
       round: 1,
       score: 0,
       value: "",
-      time: 15,
+      time: 60,
       currentRoundPoints: 1,
       answeredQuestions: 0,
       errorMessage: ""
@@ -106,7 +106,7 @@ class App extends Component {
         round: this.state.round + 1,
         errorMessage: "",
         answeredQuestions: this.state.answeredQuestions + 1,
-        time: 15
+        time: 60
       });
       if (this.state.score === 0) {
         this.setState({
