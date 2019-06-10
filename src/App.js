@@ -5,6 +5,7 @@ import "./App.css";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import Timer from "./components/timer";
+import { isRegExp } from "util";
 
 class App extends Component {
   constructor(props) {
@@ -155,6 +156,7 @@ class App extends Component {
     if (this.state.errorMessage) {
       alert = 'input-alert';
     }
+    
     // if (currentQuestion) {
     return (
       <div className="App">
