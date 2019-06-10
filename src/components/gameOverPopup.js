@@ -1,5 +1,4 @@
 import React from "react";
-import "./youWonPopup.css";
 import RestartButton from "./restartButton";
 import "../App.css";
 
