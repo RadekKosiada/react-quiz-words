@@ -3,7 +3,6 @@ body {
    
 }
 .App {
-  /* border: 1px solid grey; */
   min-width: 740px;
   margin: 10px;
   background-color:rgba(255,255,255, 0.9);
@@ -11,30 +10,32 @@ body {
   font-size: 20px;
 }
 
+/* grid for the quiz & clock */
 .main-container {
   display: grid;    
-  /* grid for the quiz & clock */
   grid-template-columns: 1fr 20vw;
 }
 
+/* grid for questions & submit form */
 .quiz-container {
   padding: 10px 30px;
-  /* grid for questions & submit form */
-}
+} 
 
+/* grid for the questions, points, score etc. */
 .questions-container {
   display: grid; 
-  /* grid for the questions, points, score etc. */
   grid-template-columns: 250px 1fr;
   grid-column-gap: 20px;
 }
 
+/* grid for submit form */
 .grid-form {
   display: grid; 
-  grid-template-columns: 20vw 1fr 150px;
+  grid-template-columns: 250px 1fr 150px;
 }
 
 input[type=text] {
+  margin-left: 20px;
   font-size: 20px;
   font-family: monospace;
   opacity: 0.8;
@@ -72,7 +73,7 @@ input[type=submit] {
   font-weight: 400;
   text-align: center;
   margin-top: 0;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .input-alert {
@@ -96,6 +97,7 @@ input[type=submit] {
 
 }
 
+/* animation for the blue circle-like shape */
 @keyframes blue-circle-moving {
   0% {
     top: -100px;
@@ -140,6 +142,7 @@ input[type=submit] {
   }
 }
 
+/* animation for current points */
 .current-points {
   opacity: 0;
   animation: pulsing-points 2.5s infinite;
@@ -218,7 +221,7 @@ input[type=submit] {
 }
 
 .time {
-  font-size: 3vw;
+  font-size: 30px;
 }
 
 /* POPUPS & OVERLAY */
