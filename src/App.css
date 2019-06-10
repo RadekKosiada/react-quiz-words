@@ -161,12 +161,13 @@ input[type=submit] {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  position: absolute;
+  position: fixed;
   top: 250px;
   left:95%;
   animation: floating-yellow 25s infinite;
 }
 
+/* animation for yellow circle-like shape */
 @keyframes floating-yellow {
   25% {    
     opacity: 0.75;
