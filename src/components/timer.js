@@ -13,7 +13,7 @@ export default function Timer(props) {
         {props.timeApp >= 10 && (
           <p className="time">00:{props.timeApp}</p>
         )}
-        <p>seconds left</p>
+        <p className="time-label">seconds left</p>
       </div>
     </div>
   );

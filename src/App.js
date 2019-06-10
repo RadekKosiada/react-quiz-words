@@ -156,12 +156,14 @@ class App extends Component {
     if (this.state.errorMessage) {
       alert = 'input-alert';
     }
-    
+
     // if (currentQuestion) {
     return (
       <div className="App">
         <div className="main-container">
+         
           <div className="quiz-container">
+            <h1>Quiz*</h1>
             <div className="questions-container">
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
