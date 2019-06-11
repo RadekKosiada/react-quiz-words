@@ -1,6 +1,6 @@
 import React from "react";
 import RestartButton from "./restartButton";
-import "../App.css";
+import "../App.scss";
 
 export default function YouWonPopup(props) {
   return (

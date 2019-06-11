@@ -1,7 +1,7 @@
 // Ctrl Shift F
 import React, { Component } from "react";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import Timer from "./components/timer";
