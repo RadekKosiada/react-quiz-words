@@ -98,6 +98,7 @@ class App extends Component {
       //if correct answer
     } else if (
       currentQuestion.answer
+        .replace(/(<([^>]+)>)/ig,"")
         .toLowerCase()
         .includes(this.state.value.toLowerCase())
     ) {
@@ -204,7 +205,7 @@ class App extends Component {
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            correctAnswer={currentQuestion.answer}
+            correctAnswer={currentQuestion.answer.replace(/(<([^>]+)>)/ig,"")}
             timeApp={this.state.time}
           />
         )}

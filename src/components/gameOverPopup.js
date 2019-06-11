@@ -19,7 +19,7 @@ export default function GameOverPopup(props) {
           </p>
         )}
         <p>
-          The correct answer is:
+          The correct answer is:<br />
           <span className="title">{props.correctAnswer}</span>
         </p>
         <RestartButton restartGamePopup={props.restartGameApp} />
