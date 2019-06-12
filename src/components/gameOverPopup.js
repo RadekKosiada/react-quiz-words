@@ -10,7 +10,7 @@ export default function GameOverPopup(props) {
         <h4>Game Over</h4>
         {props.valueFromApp && (
           <p>
-            <span className="title">{props.valueFromApp}</span> is wrong!
+            <span className="title answer">{props.valueFromApp}</span> is wrong!
           </p>
         )}
         {props.timeApp === 0 && (
