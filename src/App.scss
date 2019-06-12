@@ -195,7 +195,7 @@ input[type="text"] {
   .questions-container {
     display: grid;
     grid-template-columns: $left-col-width-xsm 200px;
-    grid-column-gap: 10px;
+    grid-column-gap: $grid-gap;
   }
 
   #timer-container {
@@ -211,7 +211,7 @@ input[type="text"] {
   .grid-form {
     display: grid;
     grid: 50px 50px / 100px 200px;
-    grid-gap: 10px;
+    grid-gap: $grid-gap;
   }
 
   input[type="submit"] {
@@ -220,6 +220,7 @@ input[type="text"] {
 
   input[type="text"] {
     margin: 0;
+    border: 1px solid lightgrey;
   }
 
   h4 {
