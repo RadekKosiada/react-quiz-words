@@ -5,12 +5,13 @@ import "./App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import Timer from "./components/timer";
-import { isRegExp } from "util";
+import secrets from "./secrets.json"
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // OLD
       allQuestions: [],
       correctAnswer: "",
       category: "",
@@ -26,7 +27,9 @@ class App extends Component {
       showYouWonPopup: false,
       time: 60,
       winCondition: 5,
-      answeredQuestions: 0
+      answeredQuestions: 0,
+      //NEW
+      allTasks: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +41,28 @@ class App extends Component {
   componentWillMount() {
     this.countTime();
     this.getQuestion();
+    this.getWordQuiz();
+  }
+  getWordQuiz() {
+    fetch(
+      "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=3",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-RapidAPI-Host": secrets["X-RapidAPI-Host"],
+          "X-RapidAPI-Key": secrets["X-RapidAPI-Key"]
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(response => {
+        console.log("Success:", response.quizlist);
+        this.setState({
+          allTasks: response.quizlist
+        });
+      })
+      .catch(error => console.error("Error:", error));
   }
   getQuestion() {
     axios
@@ -48,9 +73,8 @@ class App extends Component {
         this.setState({
           allQuestions: data
         });
-        console.log(this.state.correctAnswer);
         for (let i = 0; i < data.length; i++) {
-          console.log(data[i].answer);
+          // console.log(data[i].answer);
         }
       })
       .catch(err => {
@@ -80,10 +104,10 @@ class App extends Component {
     clearInterval(this.interval);
   }
   handleChange(event) {
-    this.setState({ 
+    this.setState({
       value: event.target.value,
       errorMessage: ""
-     });
+    });
   }
   handleSubmit(event) {
     console.log(this.state.allQuestions, this.state.round);
@@ -98,7 +122,7 @@ class App extends Component {
       //if correct answer
     } else if (
       currentQuestion.answer
-        .replace(/(<([^>]+)>)/ig,"")
+        .replace(/(<([^>]+)>)/gi, "")
         .toLowerCase()
         .includes(this.state.value.toLowerCase())
     ) {
@@ -153,16 +177,15 @@ class App extends Component {
   }
   render() {
     const currentQuestion = this.state.allQuestions[this.state.round - 1];
-    let alert = '';
+    let alert = "";
     if (this.state.errorMessage) {
-      alert = 'input-alert';
+      alert = "input-alert";
     }
 
     // if (currentQuestion) {
     return (
       <div className="App">
         <div className="main-container">
-         
           <div className="quiz-container">
             <h1>Quiz*</h1>
             <div className="questions-container">
@@ -205,7 +228,7 @@ class App extends Component {
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            correctAnswer={currentQuestion.answer.replace(/(<([^>]+)>)/ig,"")}
+            correctAnswer={currentQuestion.answer.replace(/(<([^>]+)>)/gi, "")}
             timeApp={this.state.time}
           />
         )}
