@@ -24,5 +24,4 @@ yarn-error.log*
 
 
 instructions.md
-package.json
-package-lock.json
+secrets.json
