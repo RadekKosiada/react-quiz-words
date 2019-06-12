@@ -32,15 +32,13 @@ class App extends Component {
       allTasks: []
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.restartGame = this.restartGame.bind(this);
-    this.getQuestion = this.getQuestion.bind(this);
-    this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.restartGame = this.restartGame.bind(this);
+    // this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
   }
   componentWillMount() {
     this.countTime();
-    this.getQuestion();
     this.getWordQuiz();
   }
   getWordQuiz() {
@@ -57,111 +55,95 @@ class App extends Component {
     )
       .then(res => res.json())
       .then(response => {
-        console.log("Success:", response.quizlist);
+        console.log("Success:", response);
         this.setState({
           allTasks: response.quizlist
         });
       })
       .catch(error => console.error("Error:", error));
   }
-  getQuestion() {
-    axios
-      .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
-      .then(res => {
-        //needs to change this to render
-        const data = res.data;
-        this.setState({
-          allQuestions: data
-        });
-        for (let i = 0; i < data.length; i++) {
-          // console.log(data[i].answer);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-  restartGame() {
-    console.log("fired");
-    this.setState({
-      showGameOverPopup: false,
-      showYouWonPopup: false,
-      round: 1,
-      score: 0,
-      value: "",
-      time: 60,
-      currentRoundPoints: 1,
-      answeredQuestions: 0,
-      errorMessage: ""
-    });
-    this.getQuestion();
-    this.countTime();
-  }
-  displayYouWonPopup() {
-    this.setState({
-      showYouWonPopup: true
-    });
-    clearInterval(this.interval);
-  }
+
+  // restartGame() {
+  //   console.log("fired");
+  //   this.setState({
+  //     showGameOverPopup: false,
+  //     showYouWonPopup: false,
+  //     round: 1,
+  //     score: 0,
+  //     value: "",
+  //     time: 60,
+  //     currentRoundPoints: 1,
+  //     answeredQuestions: 0,
+  //     errorMessage: ""
+  //   });
+  //   this.getQuestion();
+  //   this.countTime();
+  // }
+  // displayYouWonPopup() {
+  //   this.setState({
+  //     showYouWonPopup: true
+  //   });
+  //   clearInterval(this.interval);
+  // }
   handleChange(event) {
     this.setState({
       value: event.target.value,
       errorMessage: ""
     });
   }
-  handleSubmit(event) {
-    console.log(this.state.allQuestions, this.state.round);
-    const currentQuestion = this.state.allQuestions[this.state.round - 1];
-    console.log("A name was submitted: " + this.state.value);
-    event.preventDefault();
-    //if no answer
-    if (!this.state.value) {
-      this.setState({
-        errorMessage: "*This is a required field"
-      });
-      //if correct answer
-    } else if (
-      currentQuestion.answer
-        .replace(/(<([^>]+)>)/gi, "")
-        .toLowerCase()
-        .includes(this.state.value.toLowerCase())
-    ) {
-      console.log("correct", this.state.answeredQuestions);
-      this.setState({
-        currentRoundPoints: this.state.currentRoundPoints * 2,
-        round: this.state.round + 1,
-        errorMessage: "",
-        answeredQuestions: this.state.answeredQuestions + 1,
-        time: 60
-      });
-      if (this.state.score === 0) {
-        this.setState({
-          score: +1
-        });
-      } else {
-        this.setState({
-          score: 2 * this.state.score
-        });
-      }
-      //triggering popup after correctly answering required number of questions
-      if (this.state.round === this.state.winCondition) {
-        this.displayYouWonPopup();
-      }
-      this.setState({
-        value: ""
-      });
-      //  resetting all to 0 if wrong answer
-    } else {
-      this.setState({
-        score: 0,
-        round: this.state.round,
-        showGameOverPopup: true,
-        errorMessage: "",
-        answeredQuestions: 0
-      });
-      clearInterval(this.interval);
-    }
-  }
+  // handleSubmit(event) {
+  //   console.log(this.state.allQuestions, this.state.round);
+  //   const currentQuestion = this.state.allQuestions[this.state.round - 1];
+  //   console.log("A name was submitted: " + this.state.value);
+  //   event.preventDefault();
+  //   //if no answer
+  //   if (!this.state.value) {
+  //     this.setState({
+  //       errorMessage: "*This is a required field"
+  //     });
+  //     //if correct answer
+  //   } else if (
+  //     currentQuestion.answer
+  //       .replace(/(<([^>]+)>)/gi, "")
+  //       .toLowerCase()
+  //       .includes(this.state.value.toLowerCase())
+  //   ) {
+  //     console.log("correct", this.state.answeredQuestions);
+  //     this.setState({
+  //       currentRoundPoints: this.state.currentRoundPoints * 2,
+  //       round: this.state.round + 1,
+  //       errorMessage: "",
+  //       answeredQuestions: this.state.answeredQuestions + 1,
+  //       time: 60
+  //     });
+  //     if (this.state.score === 0) {
+  //       this.setState({
+  //         score: +1
+  //       });
+  //     } else {
+  //       this.setState({
+  //         score: 2 * this.state.score
+  //       });
+  //     }
+  //     //triggering popup after correctly answering required number of questions
+  //     if (this.state.round === this.state.winCondition) {
+  //       this.displayYouWonPopup();
+  //     }
+  //     this.setState({
+  //       value: ""
+  //     });
+  //     //  resetting all to 0 if wrong answer
+  //   } else {
+  //     this.setState({
+  //       score: 0,
+  //       round: this.state.round,
+  //       showGameOverPopup: true,
+  //       errorMessage: "",
+  //       answeredQuestions: 0
+  //     });
+  //     clearInterval(this.interval);
+  //   }
+  // }
   countTime() {
     this.interval = setInterval(() => {
       this.setState({
@@ -169,9 +151,9 @@ class App extends Component {
       });
       if (this.state.time === 0) {
         clearInterval(this.interval);
-        this.setState({
-          showGameOverPopup: true
-        });
+        // this.setState({
+        //   showGameOverPopup: true
+        // });
       }
     }, 1000);
   }
@@ -228,7 +210,7 @@ class App extends Component {
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            correctAnswer={currentQuestion.answer.replace(/(<([^>]+)>)/gi, "")}
+            correctAnswer={currentQuestion.answer}
             timeApp={this.state.time}
           />
         )}
@@ -241,14 +223,6 @@ class App extends Component {
         )}
       </div>
     );
-    // } else {
-    //   return (
-    //     <div>Loading....
-    //     <Question getQuestions={this.getQuestions} />
-    //     </div>
-    //   )
-
-    // }
   }
 }
 
