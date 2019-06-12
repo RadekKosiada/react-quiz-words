@@ -14,14 +14,21 @@ $popup-height: 350px;
 $popup-height-sm: 250px;
 $popup-width-sm: 200px;
 
+.centered {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
 
 body {
   background-color: lightgray;
 }
 .App {
   display: block;
+  @extend .centered;
   width: 98%;
-  margin: 10px auto;
   background-color: rgba(255, 255, 255, 0.9);
   font-family: $font-family;
   font-size: $main-font-size;
@@ -120,10 +127,8 @@ input[type="text"] {
 
 #timer {
   display: block;
-  position: absolute;
+  @extend .centered;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 } 
 
 .time {
@@ -149,11 +154,8 @@ input[type="text"] {
   width: $popup-width;
   height: $popup-height;
   z-index: 10;
-  position: absolute;
+  @extend .centered;
   top: 50%;
-  left: 50%;
-  margin-left: -$popup-width/2;
-  margin-top: -$popup-height/2;
   color: white;
   text-align: center;
   background-color: grey;
@@ -186,6 +188,10 @@ input[type="text"] {
     top: 2vw;
     left: 67vw;
   }
+
+  .time {
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -202,7 +208,7 @@ input[type="text"] {
   }
 
   .time {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .grid-form {
@@ -227,10 +233,9 @@ input[type="text"] {
     position: absolute;
     top: 40%;
     left: 50%;
+
     width: $popup-width-sm;
     height: $popup-height-sm;
-    margin-left: -$popup-width-sm/2;
-    margin-top: -$popup-height-sm/2;
     line-height: 90%;
     font-size: 95%;
   }
