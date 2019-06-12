@@ -1,0 +1,238 @@
+$main-color: blue;
+$opacity-color: purple;
+$alert-color: red;
+$main-font-color: black;
+$main-font-size: 20px;
+$font-family: monospace, Arial;
+$left-col-width: 250px;
+$left-col-width-sm: 25vw;
+$left-col-width-xsm: 100px;
+$grid-gap: 20px;
+$input-height: 50px;
+$popup-width: 400px;
+$popup-height: 350px;
+$popup-height-sm: 250px;
+$popup-width-sm: 200px;
+
+@mixin center-element() {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+body {
+  background-color: lightgray;
+}
+.App {
+  display: block;
+  @include center-element();
+  width: 98%;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-family: $font-family;
+  font-size: $main-font-size;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+/* grid for the quiz & clock */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 17vw;
+}
+
+/* grid for questions & submit form */
+.quiz-container {
+  padding: 10px 30px;
+  display: inline-block;
+}
+
+/* grid for the questions, points, score etc. */
+.questions-container {
+  display: grid;
+  grid-template-columns: $left-col-width 1fr;
+  grid-column-gap: $grid-gap;
+}
+
+/* grid for submit form */
+.grid-form {
+  display: grid;
+  grid-template-columns: $left-col-width 1fr 150px;
+}
+
+input[type="text"] {
+  margin-left: $grid-gap;
+  font-size: $main-font-size;
+  font-family: $font-family;
+  opacity: 0.8;
+  height: $input-height;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.answer {
+  overflow-wrap: break-word;
+}
+
+.button {
+  display: inline-block;
+  width: 120px;
+  height: $input-height;
+  background-color: white;
+  border: 2px $main-color solid;
+  color: $main-font-color;
+  font-size: $main-font-size;
+  font-family: $font-family;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: $main-color;
+  color: white;
+}
+
+.error-message {
+  color: $alert-color;
+  text-align: center;
+  margin-top: 0;
+  font-size: $main-font-size;
+}
+
+.input-alert {
+  background-color: rgba(255, 0, 0, 0.25);
+}
+
+/* TIMER */
+
+#timer-container {
+  border: 2px solid $main-color;
+  display: inline-block;
+  width: 15vw;
+  height: 15vw;
+  min-height: 150px;
+  min-width: 150px;
+  text-align: center;
+  position: relative;
+  margin: 2vw 2vw 2vw 0;
+}
+
+#timer {
+  display: block;
+  @include center-element();
+  top: 50%;
+} 
+
+.time {
+  font-size: 3vw;
+  margin-top: 10px;
+}
+
+/* POPUPS & OVERLAY */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: purple;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+}
+
+.game-over {
+  display: block;
+  width: $popup-width;
+  height: $popup-height;
+  z-index: 10;
+  @include center-element();
+  top: 50%;
+  color: white;
+  text-align: center;
+  background-color: grey;
+  border: 3px solid white;
+  text-transform: uppercase;
+  opacity: 1;
+  font-size: 25px;
+  padding: 0 10px;
+}
+
+@media (max-width: 980px) {
+  /* grid for the questions, points, score etc. */
+  .questions-container {
+    display: grid;
+    grid-template-columns: $left-col-width-sm 55vw;
+    grid-column-gap: 10px;
+  } 
+
+  /* grid for submit form */
+  .grid-form {
+    display: grid;
+    grid-template-columns: $left-col-width-sm 42vw 8vw;
+  }
+
+  #timer-container {
+    display: block;
+    width: 15vw;
+    height: 8vw;
+    position: absolute;
+    top: 2vw;
+    left: 67vw;
+  }
+
+  .time {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .questions-container {
+    display: grid;
+    grid-template-columns: $left-col-width-xsm 200px;
+    grid-column-gap: 10px;
+  }
+
+  #timer-container {
+    position: absolute;
+    top: 20px;
+    left: 200px;
+  }
+
+  .time {
+    font-size: 30px;
+  }
+
+  .grid-form {
+    display: grid;
+    grid: 50px 50px / 100px 200px;
+    grid-gap: 10px;
+  }
+
+  input[type="submit"] {
+    width: $left-col-width-xsm;
+  }
+
+  input[type="text"] {
+    margin: 0;
+  }
+
+  h4 {
+    margin-bottom: 0.5em;
+  }
+
+  .game-over {
+    @include center-element();
+    width: $popup-width-sm;
+    height: $popup-height-sm;
+    line-height: 90%;
+    font-size: 95%;
+  }
+}

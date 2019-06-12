@@ -1,16 +1,17 @@
 // Ctrl Shift F
 import React, { Component } from "react";
-import "./App.css";
 import axios from "axios";
-import GameOverPopup from "./gameOverPopup";
-import YouWonPopup from "./youWonPopup";
-import Timer from "./timer";
+import "./App.scss";
+import GameOverPopup from "./components/gameOverPopup";
+import YouWonPopup from "./components/youWonPopup";
+import Timer from "./components/timer";
+import { isRegExp } from "util";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      allQuestions: [],
       correctAnswer: "",
       category: "",
       questionId: 0,
@@ -23,7 +24,7 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 15,
+      time: 60,
       winCondition: 5,
       answeredQuestions: 0
     };
@@ -33,24 +34,24 @@ class App extends Component {
     this.getQuestion = this.getQuestion.bind(this);
     this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
-
+  }
+  componentWillMount() {
+    this.countTime();
+    this.getQuestion();
   }
   getQuestion() {
     axios
-      .get("http://jservice.io/api/random/")
-      // .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
+      .get("http://jservice.io/api/random/?count=" + this.state.winCondition)
       .then(res => {
-        //needs to change this to render 
-        console.log(res.data[0]);
-        const data = res.data[0];
+        //needs to change this to render
+        const data = res.data;
         this.setState({
-          correctAnswer: data.answer,
-          category: data.category.title,
-          questionId: data.id,
-          question: data.question,
-          questionValue: data.value
+          allQuestions: data
         });
         console.log(this.state.correctAnswer);
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i].answer);
+        }
       })
       .catch(err => {
         console.log(err);
@@ -64,23 +65,29 @@ class App extends Component {
       round: 1,
       score: 0,
       value: "",
-      time: 15,
+      time: 60,
       currentRoundPoints: 1,
-      answeredQuestions: 0
+      answeredQuestions: 0,
+      errorMessage: ""
     });
     this.getQuestion();
     this.countTime();
   }
   displayYouWonPopup() {
     this.setState({
-      showYouWonPopup: true,
+      showYouWonPopup: true
     });
     clearInterval(this.interval);
   }
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ 
+      value: event.target.value,
+      errorMessage: ""
+     });
   }
   handleSubmit(event) {
+    console.log(this.state.allQuestions, this.state.round);
+    const currentQuestion = this.state.allQuestions[this.state.round - 1];
     console.log("A name was submitted: " + this.state.value);
     event.preventDefault();
     //if no answer
@@ -90,7 +97,8 @@ class App extends Component {
       });
       //if correct answer
     } else if (
-      this.state.correctAnswer
+      currentQuestion.answer
+        .replace(/(<([^>]+)>)/ig,"")
         .toLowerCase()
         .includes(this.state.value.toLowerCase())
     ) {
@@ -99,7 +107,8 @@ class App extends Component {
         currentRoundPoints: this.state.currentRoundPoints * 2,
         round: this.state.round + 1,
         errorMessage: "",
-        answeredQuestions:this.state.answeredQuestions + 1
+        answeredQuestions: this.state.answeredQuestions + 1,
+        time: 60
       });
       if (this.state.score === 0) {
         this.setState({
@@ -111,15 +120,12 @@ class App extends Component {
         });
       }
       //triggering popup after correctly answering required number of questions
-      if (this.state.round == this.state.winCondition) {
-        console.log("YOU WON!!!")
+      if (this.state.round === this.state.winCondition) {
         this.displayYouWonPopup();
       }
       this.setState({
-        value: "", 
-      })
-      //triggering a new question
-      this.getQuestion();
+        value: ""
+      });
       //  resetting all to 0 if wrong answer
     } else {
       this.setState({
@@ -135,25 +141,30 @@ class App extends Component {
   countTime() {
     this.interval = setInterval(() => {
       this.setState({
-        time: this.state.time -1
-      })
-      if(this.state.time ==0) {
+        time: this.state.time - 1
+      });
+      if (this.state.time === 0) {
         clearInterval(this.interval);
-       this.setState({
-        showGameOverPopup: true
-       })
-      } 
-    }, 1000); 
-  }
-  componentDidMount() {
-    this.getQuestion();
-    this.countTime();
+        this.setState({
+          showGameOverPopup: true
+        });
+      }
+    }, 1000);
   }
   render() {
+    const currentQuestion = this.state.allQuestions[this.state.round - 1];
+    let alert = '';
+    if (this.state.errorMessage) {
+      alert = 'input-alert';
+    }
+
+    // if (currentQuestion) {
     return (
       <div className="App">
         <div className="main-container">
+         
           <div className="quiz-container">
+            <h1>Quiz*</h1>
             <div className="questions-container">
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
@@ -168,31 +179,34 @@ class App extends Component {
               <p>{this.state.score}</p>
 
               <p className="title">Category: </p>
-              <p>{this.state.category}</p>
+              {currentQuestion && <p>{currentQuestion.category.title}</p>}
+
               <p className="title">Question: </p>
-              <p>{this.state.question}</p>
+              {currentQuestion && <p>{currentQuestion.question}</p>}
             </div>
             <p className="error-message">{this.state.errorMessage}</p>
-
-            <form className="grid-form" onSubmit={this.handleSubmit}>           
-              Your answer:
+            {/* <Question getQuestions={this.getQuestions} /> */}
+            <form className="grid-form" onSubmit={this.handleSubmit}>
+              <span className="title">Your answer:</span>
               <input
                 type="text"
                 name="answer"
+                className={alert}
                 value={this.state.value}
                 onChange={this.handleChange}
-              />            
+              />
               <input className="button" type="submit" value="Submit" />
             </form>
           </div>
-          <Timer timeApp={this.state.time}/>
+          <Timer timeApp={this.state.time} />
         </div>
-       
+
         {this.state.showGameOverPopup && (
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            correctAnswer={this.state.correctAnswer}
+            correctAnswer={currentQuestion.answer.replace(/(<([^>]+)>)/ig,"")}
+            timeApp={this.state.time}
           />
         )}
 
@@ -204,6 +218,14 @@ class App extends Component {
         )}
       </div>
     );
+    // } else {
+    //   return (
+    //     <div>Loading....
+    //     <Question getQuestions={this.getQuestions} />
+    //     </div>
+    //   )
+
+    // }
   }
 }
 
