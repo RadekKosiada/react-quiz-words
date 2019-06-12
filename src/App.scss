@@ -14,20 +14,19 @@ $popup-height: 350px;
 $popup-height-sm: 250px;
 $popup-width-sm: 200px;
 
-.centered {
+@mixin center-element() {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%); 
 }
 
-
 body {
   background-color: lightgray;
 }
 .App {
   display: block;
-  @extend .centered;
+  @include center-element();
   width: 98%;
   background-color: rgba(255, 255, 255, 0.9);
   font-family: $font-family;
@@ -127,7 +126,7 @@ input[type="text"] {
 
 #timer {
   display: block;
-  @extend .centered;
+  @include center-element();
   top: 50%;
 } 
 
@@ -154,7 +153,7 @@ input[type="text"] {
   width: $popup-width;
   height: $popup-height;
   z-index: 10;
-  @extend .centered;
+  @include center-element();
   top: 50%;
   color: white;
   text-align: center;
@@ -230,10 +229,7 @@ input[type="text"] {
   }
 
   .game-over {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-
+    @include center-element();
     width: $popup-width-sm;
     height: $popup-height-sm;
     line-height: 90%;
