@@ -125,20 +125,41 @@ class App extends Component {
           errorMessage: "",
           answeredQuestions: this.state.answeredQuestions + 1,
           time: 60,
-          selected: ''
+          selected: '',
         });
+        //giving score for the current round
+        if(this.state.score === 0) {
+          this.setState({
+            score: ++this.state.score
+          })
+        } else {
+          this.setState({
+            score: this.state.score * 2
+          })
+        }
       console.log("YAYAYAY!");
       // if wrong answer
     } else {
       this.setState({
-              score: 0,
-              round: this.state.round,
-              showGameOverPopup: true,
-              errorMessage: "",
-              answeredQuestions: 0
-            });
-            clearInterval(this.interval);
+        score: 0,
+        round: this.state.round,
+        errorMessage: "",
+        answeredQuestions: 0,
+        selected: '',
+        showGameOverPopup: true
+      });
+      clearInterval(this.interval);
     }
+    // else {
+    //   this.setState({
+    //           score: 0,
+    //           round: this.state.round,
+    //           showGameOverPopup: true,
+    //           errorMessage: "",
+    //           answeredQuestions: 0
+    //         });
+    //         clearInterval(this.interval);
+    // }
   }
 
 
