@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-quiz-words/static/css/main.837f8d10.chunk.css",
-    "main.js": "/react-quiz-words/static/js/main.8a0ac36a.chunk.js",
-    "main.js.map": "/react-quiz-words/static/js/main.8a0ac36a.chunk.js.map",
+    "main.js": "/react-quiz-words/static/js/main.35b50a78.chunk.js",
+    "main.js.map": "/react-quiz-words/static/js/main.35b50a78.chunk.js.map",
     "runtime~main.js": "/react-quiz-words/static/js/runtime~main.8460acf8.js",
     "runtime~main.js.map": "/react-quiz-words/static/js/runtime~main.8460acf8.js.map",
     "static/js/2.a10f2e64.chunk.js": "/react-quiz-words/static/js/2.a10f2e64.chunk.js",
     "static/js/2.a10f2e64.chunk.js.map": "/react-quiz-words/static/js/2.a10f2e64.chunk.js.map",
     "index.html": "/react-quiz-words/index.html",
-    "precache-manifest.0a3ea9a97c85ea8cb8ae3fc82bc5183b.js": "/react-quiz-words/precache-manifest.0a3ea9a97c85ea8cb8ae3fc82bc5183b.js",
+    "precache-manifest.dbe4ad358f1795694c9f425af000e7c4.js": "/react-quiz-words/precache-manifest.dbe4ad358f1795694c9f425af000e7c4.js",
     "service-worker.js": "/react-quiz-words/service-worker.js",
     "static/css/main.837f8d10.chunk.css.map": "/react-quiz-words/static/css/main.837f8d10.chunk.css.map"
   }

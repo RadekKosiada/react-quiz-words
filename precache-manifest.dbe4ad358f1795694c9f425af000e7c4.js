@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "758223d6ccd09d4bdcfb0c25b5c0ac25",
+    "revision": "7f08024e420f738b05b0532b56c1278b",
     "url": "/react-quiz-words/index.html"
   },
   {
-    "revision": "9ad611621e4630b7d01a",
+    "revision": "05f90cf1ef9ff1a579f7",
     "url": "/react-quiz-words/static/css/main.837f8d10.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-quiz-words/static/js/2.a10f2e64.chunk.js"
   },
   {
-    "revision": "9ad611621e4630b7d01a",
-    "url": "/react-quiz-words/static/js/main.8a0ac36a.chunk.js"
+    "revision": "05f90cf1ef9ff1a579f7",
+    "url": "/react-quiz-words/static/js/main.35b50a78.chunk.js"
   },
   {
     "revision": "2d762acf9aca03b7d583",
