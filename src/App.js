@@ -101,8 +101,8 @@ class App extends Component {
   // }
   handleChange(event) {    
       this.setState({      
-        selected: event.target.value
-        // errorMessage: ""
+        selected: event.target.value,
+        errorMessage: ""
       });
     
   }
@@ -114,11 +114,16 @@ class App extends Component {
   //   const currentQuestion = this.state.allQuestions[this.state.round - 1];
   //   console.log("A name was submitted: " + this.state.value);
     
-  //   //if no answer
-  //   if (!this.state.value) {
-  //     this.setState({
-  //       errorMessage: "*This is a required field"
-  //     });
+    //if no answer
+    if (!this.state.selected) {
+      this.setState({
+        errorMessage: "*Please choose one of the options"
+      });
+    } else {
+      this.setState({
+        errorMessage: ""
+      });
+    }
   //     //if correct answer
   //   } else if (
   //     currentQuestion.answer
@@ -205,7 +210,8 @@ class App extends Component {
 
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
-
+              </div>
+              <p className="error-message">{this.state.errorMessage}</p>
               {this.state.allTasks && (
                 <InputForm
                   selected={this.state.selected}
@@ -215,26 +221,8 @@ class App extends Component {
                   handleSubmit={this.handleSubmit}
                 />
               )}
-
-              {/* <p className="title">Words:</p>              
-                {currentSet && (<div className="form-check">
-                {currentSet.quiz.map((elem, index) => (               
-                <label key={index}>
-                  <input type="radio" value={elem} className="form-check-input" />
-                  {elem}
-                </label>
-               ))}</div>)} */}
-
-              {/* {currentSet && (<p>{currentSet.quiz.map((elem, index) => (
-                <input type="radio" key={index}>{elem} />
-              ))}</p>)} */}
-              {/* {<p> 
-                <span>{currentQuestion.quiz[0]}</span>
-                <span>{currentQuestion.quiz[1]}</span>
-                <span>{currentQuestion.quiz[2]}</span>
-              </p>} */}
-            </div>
-            <p className="error-message">{this.state.errorMessage}</p>
+            
+           
           </div>
           <Timer timeApp={this.state.time} />
         </div>
