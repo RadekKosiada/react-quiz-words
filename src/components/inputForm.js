@@ -21,14 +21,14 @@ export default class InputForm extends Component {
           <span key={index}>{elem} </span>
           ))}</p>)}
 
-          <p className="title">Options:</p>
+          <p className="title">Your answer:</p>
           {!currentSet && (<p>Loading....</p>)}
           {currentSet && (
             <form className="">
               {currentSet.option.map((elem, index) => (
                 <div className="radio" key={index}>
                   <label>
-                    <input type="radio" value={elem} checked={false} />
+                    <input type="radio" value={elem} onChange={this.props.onChange} />
                     {elem}
                   </label>
                 </div>

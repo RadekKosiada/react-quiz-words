@@ -202,6 +202,7 @@ class App extends Component {
               <InputForm 
                 round = {this.state.round}
                 allTasks={this.state.allTasks}
+                handleChange={this.handleChange}
               />
               )}
 
