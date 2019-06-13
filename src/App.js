@@ -19,7 +19,7 @@ class App extends Component {
       questionId: 0,
       question: "",
       questionValue: 0,
-      value: "",
+      selected: '',
       score: 0,
       currentRoundPoints: 1,
       errorMessage: "",
@@ -34,7 +34,7 @@ class App extends Component {
       data: []
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     // this.restartGame = this.restartGame.bind(this);
     // this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
@@ -100,16 +100,27 @@ class App extends Component {
   //   clearInterval(this.interval);
   // }
   handleChange(event) {
-    this.setState({
-      value: event.target.value,
-      errorMessage: ""
-    });
+    console.log(event.target)
+    console.log(this.state.selected)
+    // if(this.state.selected.length = 0) {
+      this.setState({      
+        selected: event.target.value
+        // errorMessage: ""
+      });
+    // } else { 
+    //   return;
+    // }
+    
+    
   }
-  // handleSubmit(event) {
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.selected, "handleSubmit")
+
   //   console.log(this.state.allQuestions, this.state.round);
   //   const currentQuestion = this.state.allQuestions[this.state.round - 1];
   //   console.log("A name was submitted: " + this.state.value);
-  //   event.preventDefault();
+    
   //   //if no answer
   //   if (!this.state.value) {
   //     this.setState({
@@ -157,7 +168,7 @@ class App extends Component {
   //     });
   //     clearInterval(this.interval);
   //   }
-  // }
+  }
   countTime() {
     this.interval = setInterval(() => {
       this.setState({
@@ -184,26 +195,32 @@ class App extends Component {
       <div className="App">
         <div className="main-container">
           <div className="quiz-container">
-            <h1>Quiz*</h1>
+            <h1>Quiz</h1>
             <div className="questions-container">
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
 
               <p className="title">Points for the current round: </p>
-              <p className="current-points">{this.state.currentRoundPoints}</p>
+              <p className="current-points">
+                {this.state.currentRoundPoints}
+              </p>
 
               <p className="title">Questions left to win: </p>
-              <p>{this.state.winCondition - this.state.answeredQuestions}</p>
+              <p>
+                {this.state.winCondition - this.state.answeredQuestions}
+              </p>
 
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
 
               {this.state.allTasks && (
-              <InputForm 
-                round = {this.state.round}
-                allTasks={this.state.allTasks}
-                handleChange={this.handleChange}
-              />
+                <InputForm
+                  selected={this.state.selected}
+                  round={this.state.round}
+                  allTasks={this.state.allTasks}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                />
               )}
 
               {/* <p className="title">Words:</p>              
@@ -223,22 +240,8 @@ class App extends Component {
                 <span>{currentQuestion.quiz[1]}</span>
                 <span>{currentQuestion.quiz[2]}</span>
               </p>} */}
-
-
             </div>
             <p className="error-message">{this.state.errorMessage}</p>
-            {/* <Question getQuestions={this.getQuestions} /> */}
-            <form className="grid-form" onSubmit={this.handleSubmit}>
-              <span className="title">Your answer:</span>
-              <input
-                type="text"
-                name="answer"
-                className={alert}
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-              <input className="button" type="submit" value="Submit" />
-            </form>
           </div>
           <Timer timeApp={this.state.time} />
         </div>
