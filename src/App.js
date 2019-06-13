@@ -197,10 +197,17 @@ class App extends Component {
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
 
-              <p className="title">Words:</p>
-              <ul>{this.state.allTasks.map((el, index) => (
-                <li key={index}>{el.quiz}</li>
-              ))}</ul>
+              <p className="title">Words:</p>              
+                {currentSet && (<div className="form-check">
+                {currentSet.quiz.map((elem, index) => (               
+                <label key={index}>
+                  <input type="radio" value={elem} className="form-check-input" />
+                  {elem}
+                </label>
+               ))}</div>)}
+              {/* {currentSet && (<p>{currentSet.quiz.map((elem, index) => (
+                <input type="radio" key={index}>{elem} />
+              ))}</p>)} */}
               {/* {<p> 
                 <span>{currentQuestion.quiz[0]}</span>
                 <span>{currentQuestion.quiz[1]}</span>
