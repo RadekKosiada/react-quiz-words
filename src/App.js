@@ -201,7 +201,7 @@ class App extends Component {
               {this.state.allTasks && (
               <InputForm 
                 round = {this.state.round}
-                allTasksApp={this.state.allTasks}
+                allTasks={this.state.allTasks}
               />
               )}
 
