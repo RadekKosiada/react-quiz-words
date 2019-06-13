@@ -29,7 +29,8 @@ class App extends Component {
       winCondition: 5,
       answeredQuestions: 0,
       //NEW
-      allTasks: []
+      allTasks: [],
+      data: []
     };
     this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,31 +38,43 @@ class App extends Component {
     // this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     this.countTime();
     this.getWordQuiz();
   }
-  getWordQuiz() {
-    fetch(
-      "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=3",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "X-RapidAPI-Host": secrets["X-RapidAPI-Host"],
-          "X-RapidAPI-Key": secrets["X-RapidAPI-Key"]
+  async getWordQuiz() {
+    try {
+      const response = await fetch(
+        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=3",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-RapidAPI-Host": secrets["X-RapidAPI-Host"],
+            "X-RapidAPI-Key": secrets["X-RapidAPI-Key"]
+          }
         }
-      }
-    )
-      .then(res => res.json())
-      .then(response => {
-        console.log("Success:", response);
-        this.setState({
-          allTasks: response.quizlist
-        });
-      })
-      .catch(error => console.error("Error:", error));
+      );
+      const data = await response.json();
+      this.setState({ allTasks: data.quizlist });
+      console.log(this.state.allTasks)
+    } catch(err) {
+      console.log(err.message);
+    }
   }
+
+  //   if (!response.ok) {
+  //     throw Error(response.statusText);
+  //   }
+  //     .then(res => res.json())
+  //     .then(response => {
+  //       console.log("Success:", response.quizlist);
+  //       this.setState({
+  //         allTasks: response.quizlist
+  //       });
+  //     })
+  //     .catch(error => console.error("Error:", error));
+  // }
 
   // restartGame() {
   //   console.log("fired");
@@ -158,7 +171,8 @@ class App extends Component {
     }, 1000);
   }
   render() {
-    const currentQuestion = this.state.allQuestions[this.state.round - 1];
+    const currentSet = this.state.allTasks[this.state.round - 1];
+    // console.log(this.state.allTasks[this.state.round - 1])
     let alert = "";
     if (this.state.errorMessage) {
       alert = "input-alert";
@@ -183,11 +197,17 @@ class App extends Component {
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
 
-              <p className="title">Category: </p>
-              {currentQuestion && <p>{currentQuestion.category.title}</p>}
+              <p className="title">Words:</p>
+              <ul>{this.state.allTasks.map((el, index) => (
+                <li key={index}>{el.quiz}</li>
+              ))}</ul>
+              {/* {<p> 
+                <span>{currentQuestion.quiz[0]}</span>
+                <span>{currentQuestion.quiz[1]}</span>
+                <span>{currentQuestion.quiz[2]}</span>
+              </p>} */}
 
-              <p className="title">Question: </p>
-              {currentQuestion && <p>{currentQuestion.question}</p>}
+
             </div>
             <p className="error-message">{this.state.errorMessage}</p>
             {/* <Question getQuestions={this.getQuestions} /> */}
@@ -210,7 +230,7 @@ class App extends Component {
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            correctAnswer={currentQuestion.answer}
+            // correctAnswer={currentQuestion.answer}
             timeApp={this.state.time}
           />
         )}
