@@ -99,18 +99,11 @@ class App extends Component {
   //   });
   //   clearInterval(this.interval);
   // }
-  handleChange(event) {
-    console.log(event.target)
-    console.log(this.state.selected)
-    // if(this.state.selected.length = 0) {
+  handleChange(event) {    
       this.setState({      
         selected: event.target.value
         // errorMessage: ""
       });
-    // } else { 
-    //   return;
-    // }
-    
     
   }
   handleSubmit(event) {

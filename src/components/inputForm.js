@@ -31,7 +31,8 @@ export default class InputForm extends Component {
                   <label>
                     <input 
                       type="radio" 
-                      value={elem} 
+                      name="quiz"
+                      value={index} 
                       checked={this.state.selected} 
                       onChange={this.props.handleChange} />
                     {elem}
