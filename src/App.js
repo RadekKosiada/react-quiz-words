@@ -8,6 +8,8 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
+const timeToAnswer = 15;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,8 +28,8 @@ class App extends Component {
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
-      time: 60,
-      winCondition: 5,
+      time: timeToAnswer,
+      winCondition: 10,
       answeredQuestions: 0,
       //NEW
       allTasks: [],
@@ -36,7 +38,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
-    // this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
+    this.displayYouWonPopup = this.displayYouWonPopup.bind(this);
     this.countTime = this.countTime.bind(this);
   }
   componentDidMount() {
@@ -46,7 +48,7 @@ class App extends Component {
   async getWordQuiz() {
     try {
       const response = await fetch(
-        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=3",
+        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=5",
         {
           method: "GET",
           headers: {
@@ -81,15 +83,15 @@ class App extends Component {
     this.setState({
       showGameOverPopup: false,
       showYouWonPopup: false,
-      // round: 1,
-      // score: 0,
-      // value: "",
-      // time: 60,
-      // currentRoundPoints: 1,
-      // answeredQuestions: 0,
-      // errorMessage: ""
+      round: 1,
+      score: 0,
+      value: "",
+      time: timeToAnswer,
+      currentRoundPoints: 1,
+      answeredQuestions: 0,
+      errorMessage: ""
     });
-   this.getWordQuiz();
+    this.getWordQuiz();
     this.countTime();
   }
   displayYouWonPopup() {
@@ -108,9 +110,15 @@ class App extends Component {
     const currentSet = this.state.allTasks[this.state.round - 1];
     const selectedNumber = Number(this.state.selected);
     //unchecking the radio button
-    document.querySelectorAll('input[type="radio"]')[selectedNumber].checked = false;
+    document.querySelectorAll('input[type="radio"]')[
+      selectedNumber
+    ].checked = false;
     event.preventDefault();
-    console.log(typeof selectedNumber, typeof this.state.selected, "handleSubmit");
+    console.log(
+      typeof selectedNumber,
+      typeof this.state.selected,
+      "handleSubmit"
+    );
     // if no answer
     if (!this.state.selected) {
       this.setState({
@@ -118,52 +126,46 @@ class App extends Component {
       });
     } else {
       //if correct answer
-      if (selectedNumber === currentSet.correct-1) {
+      if (selectedNumber === currentSet.correct - 1) {
         this.setState({
           currentRoundPoints: this.state.currentRoundPoints * 2,
           round: this.state.round + 1,
           errorMessage: "",
           answeredQuestions: this.state.answeredQuestions + 1,
           time: 60,
-          selected: '',
+          selected: ""
         });
         //giving score for the current round
-        if(this.state.score === 0) {
+        if (this.state.score === 0) {
           this.setState({
             score: ++this.state.score
-          })
+          });
         } else {
           this.setState({
             score: this.state.score * 2
-          })
+          });
         }
-      console.log("YAYAYAY!");
-      // if wrong answer
-    } else {
-      this.setState({
-        score: 0,
-        round: this.state.round,
-        errorMessage: "",
-        answeredQuestions: 0,
-        selected: '',
-        showGameOverPopup: true
-      });
-      clearInterval(this.interval);
+        console.log("YAYAYAY!");
+        // if wrong answer
+      } else {
+        this.setState({
+          score: 0,
+          round: this.state.round,
+          errorMessage: "",
+          answeredQuestions: 0,
+          selected: "",
+          showGameOverPopup: true
+        });
+        clearInterval(this.interval);
+      }
     }
-    // else {
-    //   this.setState({
-    //           score: 0,
-    //           round: this.state.round,
-    //           showGameOverPopup: true,
-    //           errorMessage: "",
-    //           answeredQuestions: 0
-    //         });
-    //         clearInterval(this.interval);
-    // }
-  }
-
-
-
+    //Winning the whole round
+    if(this.state.round === this.state.winCondition) {
+      // this.setState({
+      //   showYouWonPopup: true
+      // })
+      this.displayYouWonPopup();
+    }
 
   }
   countTime() {
@@ -173,9 +175,9 @@ class App extends Component {
       });
       if (this.state.time === 0) {
         clearInterval(this.interval);
-        // this.setState({
-        //   showGameOverPopup: true
-        // });
+        this.setState({
+          showGameOverPopup: true
+        });
       }
     }, 1000);
   }
