@@ -8,7 +8,7 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 15;
+const timeToAnswer = 60;
 
 class App extends Component {
   constructor(props) {
@@ -60,24 +60,11 @@ class App extends Component {
       );
       const data = await response.json();
       this.setState({ allTasks: data.quizlist });
+      console.log(this.state.allTasks)
     } catch (err) {
       console.log(err.message);
     }
   }
-
-  //   if (!response.ok) {
-  //     throw Error(response.statusText);
-  //   }
-  //     .then(res => res.json())
-  //     .then(response => {
-  //       console.log("Success:", response.quizlist);
-  //       this.setState({
-  //         allTasks: response.quizlist
-  //       });
-  //     })
-  //     .catch(error => console.error("Error:", error));
-  // }
-
   restartGame() {
     console.log("fired");
     this.setState({
@@ -154,7 +141,8 @@ class App extends Component {
           errorMessage: "",
           answeredQuestions: 0,
           selected: "",
-          showGameOverPopup: true
+          showGameOverPopup: true,
+          correctAnswer: currentSet.option[currentSet.correct-1]
         });
         clearInterval(this.interval);
       }
@@ -226,7 +214,7 @@ class App extends Component {
           <GameOverPopup
             restartGameApp={this.restartGame}
             valueFromApp={this.state.value}
-            // correctAnswer={currentQuestion.answer}
+            correctAnswer={this.state.correctAnswer}
             timeApp={this.state.time}
           />
         )}
