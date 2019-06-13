@@ -4,6 +4,7 @@ import axios from "axios";
 import "./App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
+import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json"
 
@@ -197,14 +198,19 @@ class App extends Component {
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
 
-              <p className="title">Words:</p>              
+              <InputForm 
+                allTasksApp={this.allTasks}
+              />
+
+              {/* <p className="title">Words:</p>              
                 {currentSet && (<div className="form-check">
                 {currentSet.quiz.map((elem, index) => (               
                 <label key={index}>
                   <input type="radio" value={elem} className="form-check-input" />
                   {elem}
                 </label>
-               ))}</div>)}
+               ))}</div>)} */}
+
               {/* {currentSet && (<p>{currentSet.quiz.map((elem, index) => (
                 <input type="radio" key={index}>{elem} />
               ))}</p>)} */}
