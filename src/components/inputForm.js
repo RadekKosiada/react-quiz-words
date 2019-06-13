@@ -39,7 +39,7 @@ export default class InputForm extends Component {
                   </label>
                 </div>
               ))}
-              <button type="submit">Submit</button>
+              <input className="button" type="submit" value="Submit" />
             </form>
           )}
         </div>
