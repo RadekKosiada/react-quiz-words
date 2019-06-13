@@ -198,9 +198,12 @@ class App extends Component {
               <p className="title">Your score: </p>
               <p>{this.state.score}</p>
 
+              {this.state.allTasks && (
               <InputForm 
-                allTasksApp={this.allTasks}
+                round = {this.state.round}
+                allTasksApp={this.state.allTasks}
               />
+              )}
 
               {/* <p className="title">Words:</p>              
                 {currentSet && (<div className="form-check">
