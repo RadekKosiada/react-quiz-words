@@ -8,7 +8,7 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 60;
+const timeToAnswer = 15;
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +31,7 @@ class App extends Component {
       time: timeToAnswer,
       winCondition: 10,
       answeredQuestions: 0,
+      level: 5,
       //NEW
       allTasks: [],
       data: []
@@ -48,7 +49,7 @@ class App extends Component {
   async getWordQuiz() {
     try {
       const response = await fetch(
-        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=5",
+        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level="+this.state.level,
         {
           method: "GET",
           headers: {
