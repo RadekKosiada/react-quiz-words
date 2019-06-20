@@ -1,24 +1,7 @@
-$main-color: blue;
-$opacity-color: purple;
-$alert-color: red;
-$main-font-color: black;
-$main-font-size: 20px;
-$font-family: monospace, Arial;
-$left-col-width: 250px;
-$left-col-width-sm: 25vw;
-$left-col-width-xsm: 100px;
-$grid-gap: 20px;
-$input-height: 50px;
-$popup-width: 400px;
-$popup-height: 350px;
-$popup-height-sm: 250px;
-$popup-width-sm: 200px;
+@import "variables";
 
-@mixin center-element() {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
+.border {
+  border: 2px solid $main-color;
 }
 
 body {
@@ -76,7 +59,7 @@ p {
   width: 120px;
   height: $input-height;
   background-color: white;
-  border: 2px $main-color solid;
+  @extend .border;
   color: $main-font-color;
   font-size: $main-font-size;
   font-family: $font-family;
@@ -104,7 +87,7 @@ p {
 /* TIMER */
 
 #timer-container {
-  border: 2px solid $main-color;
+  @extend .border;
   display: inline-block;
   width: 15vw;
   height: 15vw;
@@ -118,7 +101,7 @@ p {
 #timer {
   display: block;
   @include center-element();
-} 
+}
 
 .time {
   font-size: 3vw;
@@ -160,7 +143,7 @@ p {
     display: grid;
     grid-template-columns: $left-col-width-sm 55vw;
     grid-column-gap: 10px;
-  } 
+  }
 
   /* grid for submit form */
   .grid-form {
@@ -222,4 +205,3 @@ p {
   }
 }
 
-// Radio buttons
