@@ -1,8 +1,4 @@
-@import "variables";
-
-.border {
-  border: 2px solid $main-color;
-}
+@import "utilities";
 
 body {
   background-color: lightgray;

@@ -20,3 +20,7 @@ $popup-width-sm: 200px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.border {
+  border: 2px solid $main-color;
+}

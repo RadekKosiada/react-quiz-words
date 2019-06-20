@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "../App.scss";
-import "../radioButton.scss";
+import "../scss-files/App.scss";
+import "../scss-files/radioButton.scss";
 import axios from "axios";
 
 export default class InputForm extends Component {

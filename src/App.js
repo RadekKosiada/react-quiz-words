@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./App.scss";
+import "./scss-files/App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import InputForm from "./components/inputForm";
