@@ -7,6 +7,8 @@ import YouWonPopup from "./components/youWonPopup";
 import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
+import { connect } from 'react-redux';
+import {increment} from './actions';
 
 const timeToAnswer = 15;
 
@@ -128,6 +130,8 @@ class App extends Component {
           this.setState({
             score: ++this.state.score
           });
+
+          this.props.incrementScore();
         } else {
           this.setState({
             score: this.state.score * 2
@@ -226,9 +230,22 @@ class App extends Component {
             scoreFromApp={this.state.score}
           />
         )}
+        <button onClick={()=>this.props.increment}>CLICK</button>
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    incrementScore: () => {
+      dispatch(increment())
+    }
+  }
+}
+
+export default connect(
+ null,
+ //
+  mapDispatchToProps
+)(App);
