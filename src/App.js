@@ -10,7 +10,7 @@ import secrets from "./secrets.json";
 import { connect } from 'react-redux';
 import {increment} from './actions';
 
-const timeToAnswer = 15;
+const timeToAnswer = 60;
 
 class App extends Component {
   constructor(props) {
@@ -122,7 +122,7 @@ class App extends Component {
           round: this.state.round + 1,
           errorMessage: "",
           answeredQuestions: this.state.answeredQuestions + 1,
-          time: 60,
+          time: timeToAnswer,
           selected: ""
         });
         //giving score for the current round
@@ -230,7 +230,7 @@ class App extends Component {
             scoreFromApp={this.state.score}
           />
         )}
-        <button onClick={()=>this.props.increment}>CLICK</button>
+        {/* <button onClick={()=>this.props.increment}>CLICK</button> */}
       </div>
     );
   }
@@ -239,6 +239,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     incrementScore: () => {
+      //from actions.js
       dispatch(increment())
     }
   }
