@@ -7,7 +7,7 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 15;
+const timeToAnswer = 60;
 
 class App extends Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class App extends Component {
       answeredQuestions: 0,
       errorMessage: ""
     });
-    this.getWordQuiz();
+    // this.getWordQuiz();
     this.countTime();
   }
   displayYouWonPopup() {

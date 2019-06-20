@@ -24,6 +24,7 @@ $popup-width-sm: 200px;
 body {
   background-color: lightgray;
 }
+
 .App {
   width: 98%;
   height: 98%;
@@ -60,16 +61,6 @@ p {
 .grid-form {
   display: grid;
   grid-template-columns: $left-col-width 1fr 150px;
-}
-
-input[type="text"] {
-  margin-left: $grid-gap;
-  font-size: $main-font-size;
-  font-family: $font-family;
-  opacity: 0.8;
-  height: $input-height;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 .title {
@@ -218,11 +209,6 @@ input[type="text"] {
     width: $left-col-width-xsm;
   }
 
-  input[type="text"] {
-    margin: 0;
-    border: 1px solid lightgrey;
-  }
-
   h4 {
     margin-bottom: 0.5em;
   }
@@ -235,3 +221,5 @@ input[type="text"] {
     font-size: 95%;
   }
 }
+
+// Radio buttons
