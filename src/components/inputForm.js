@@ -21,7 +21,7 @@ export default class InputForm extends Component {
           {currentSet && (
             <p>
               {currentSet.quiz.map((elem, index) => (
-                <span key={index}>{elem} </span>
+                <span className="single-word" key={index}>{elem} </span>
               ))}
             </p>
           )}

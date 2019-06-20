@@ -43,6 +43,20 @@ p {
   grid-column-gap: 10px;
 }
 
+.single-word {
+  display: inline-block;
+  width: 100px;
+  height: 25px;
+  margin-right: 10px;
+  border-left: 2px solid $main-color;
+  // background-color: rgba(0, 0, 255, 0.85);
+  padding-left: 10px;
+  // text-align: center;
+  color: $main-color;
+  // transform: translate(0, -5px);
+  // transform: skew(-5deg, 0);
+}
+
 input[type="submit"] {
   transform: translate(0, -5px);
 }
