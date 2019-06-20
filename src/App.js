@@ -35,7 +35,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.countTime();
-    // this.getWordQuiz();
+    this.getWordQuiz();
 
   }
   getFakeWords() {

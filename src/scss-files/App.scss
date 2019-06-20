@@ -39,7 +39,12 @@ p {
 /* grid for submit form */
 .grid-form {
   display: grid;
-  grid-template-columns: $left-col-width 1fr 150px;
+  grid-template-columns: 200px 200px 50px;
+  grid-column-gap: 10px;
+}
+
+input[type="submit"] {
+  transform: translate(0, -5px);
 }
 
 .title {

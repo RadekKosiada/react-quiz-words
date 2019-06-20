@@ -4,6 +4,10 @@ input[type="radio"] {
   opacity: 0;
 }
 
+.radio {
+  display: inline-block;
+}
+
 .checkmark {
   display: inline-block;
   height: 25px;
@@ -12,11 +16,12 @@ input[type="radio"] {
   opacity: 0.75;
   border-radius: 50%;
   transition: 0.25s;
+  margin-right: -10px;
+  transform: translate(-20px, 6px);
 }
 
 .checkmark:hover {
   cursor: pointer;
-  transform: scale(1.1);
   opacity: 1;
 }
 
