@@ -14,13 +14,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // OLD
-      allQuestions: [],
-      correctAnswer: "",
-      category: "",
-      questionId: 0,
-      question: "",
-      questionValue: 0,
+      allTasks: [],
+      correctAnswer: "", 
       selected: "",
       score: 0,
       currentRoundPoints: 1,
@@ -31,10 +26,7 @@ class App extends Component {
       time: timeToAnswer,
       winCondition: 10,
       answeredQuestions: 0,
-      level: 5,
-      //NEW
-      allTasks: [],
-      data: []
+      level: 5
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

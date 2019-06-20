@@ -25,9 +25,9 @@ body {
   background-color: lightgray;
 }
 .App {
-  display: block;
-  @include center-element();
   width: 98%;
+  height: 98%;
+  @include center-element();
   background-color: rgba(255, 255, 255, 0.9);
   font-family: $font-family;
   font-size: $main-font-size;
