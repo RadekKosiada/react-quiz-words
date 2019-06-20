@@ -6,7 +6,7 @@ body {
 
 .App {
   width: 98%;
-  height: 98%;
+  height: 88%;
   @include center-element();
   background-color: rgba(255, 255, 255, 0.9);
   font-family: $font-family;
@@ -49,13 +49,17 @@ p {
   height: 25px;
   margin-right: 10px;
   border-left: 2px solid $main-color;
-  // background-color: rgba(0, 0, 255, 0.85);
-  padding-left: 10px;
-  // text-align: center;
+  padding-left: 5px;
+  text-align: center;
   color: $main-color;
-  // transform: translate(0, -5px);
-  // transform: skew(-5deg, 0);
+  transform: skew(-5deg, 0);
 }
+
+.single-word:last-of-type {
+  border-right: 2px solid $main-color;
+  padding-right: 10px;
+}
+
 
 input[type="submit"] {
   transform: translate(0, -5px);

@@ -179,6 +179,7 @@ class App extends Component {
         <div className="main-container">
           <div className="quiz-container">
             <h1>Quiz</h1>
+            <h4>Choose one answer that matches all three following words</h4>
             <div className="questions-container">
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
