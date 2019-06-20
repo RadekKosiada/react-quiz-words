@@ -7,7 +7,7 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 60;
+const timeToAnswer = 5;
 
 class App extends Component {
   constructor(props) {
@@ -36,9 +36,6 @@ class App extends Component {
   componentDidMount() {
     this.countTime();
     this.getWordQuiz();
-
-  }
-  getFakeWords() {
 
   }
   async getWordQuiz() {
@@ -138,7 +135,7 @@ class App extends Component {
           answeredQuestions: 0,
           selected: "",
           showGameOverPopup: true,
-          correctAnswer: currentSet.option[currentSet.correct-1]
+          correctAnswer: currentSet.option[currentSet.correct-1],
         });
         clearInterval(this.interval);
       }
@@ -153,6 +150,8 @@ class App extends Component {
 
   }
   countTime() {
+    console.log(this.state.round, this.state.allTasks);
+    const currentSet = this.state.allTasks[this.state.round - 1];
     this.interval = setInterval(() => {
       this.setState({
         time: this.state.time - 1
@@ -160,14 +159,14 @@ class App extends Component {
       if (this.state.time === 0) {
         clearInterval(this.interval);
         this.setState({
-          showGameOverPopup: true
+          showGameOverPopup: true,
+          // correctAnswer: currentSet.option[currentSet.correct-1],
         });
       }
     }, 1000);
   }
   render() {
     const currentSet = this.state.allTasks[this.state.round - 1];
-    // console.log(this.state.allTasks[this.state.round - 1])
     let alert = "";
     if (this.state.errorMessage) {
       alert = "input-alert";

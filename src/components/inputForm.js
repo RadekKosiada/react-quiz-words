@@ -48,16 +48,6 @@ export default class InputForm extends Component {
               <input className="button" type="submit" value="Submit" />
             </form>
           )}
-          {/* <label>
-            <input type="radio" name="quiz" value="Pizza" />
-            <span className="checkmark" />
-            Pizza
-          </label>
-          <label>
-            <input type="radio" name="quiz" value="Pasta" />
-            <span className="checkmark" />
-            Pasta
-          </label> */}
         </div>
       </div>
     );
