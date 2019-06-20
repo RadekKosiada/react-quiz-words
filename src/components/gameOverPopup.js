@@ -11,10 +11,10 @@ export default function GameOverPopup(props) {
         {props.timeApp === 0 && (
           <p>Too late!</p>
         )}
-        <p>
-          The correct answer is:<br />
+       
+          {props.timeApp > 0 && (<p>The correct answer is:<br />
           <span className="title">{props.correctAnswer}</span>
-        </p>
+        </p>)}
         <RestartButton restartGamePopup={props.restartGameApp} />
       </div>
     </div>
