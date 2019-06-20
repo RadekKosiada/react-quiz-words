@@ -1,4 +1,3 @@
-// Ctrl Shift F
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.scss";
@@ -36,7 +35,11 @@ class App extends Component {
   }
   componentDidMount() {
     this.countTime();
-    this.getWordQuiz();
+    // this.getWordQuiz();
+
+  }
+  getFakeWords() {
+
   }
   async getWordQuiz() {
     try {
@@ -53,7 +56,7 @@ class App extends Component {
       );
       const data = await response.json();
       this.setState({ allTasks: data.quizlist });
-      console.log(this.state.allTasks)
+      console.log(data)
     } catch (err) {
       console.log(err.message);
     }

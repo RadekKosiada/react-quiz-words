@@ -28,7 +28,7 @@ export default class InputForm extends Component {
             <form className="" onSubmit={this.props.handleSubmit}>
               {currentSet.option.map((elem, index) => (
                 <div className="radio" key={index}>
-                  <label>
+                  {/* <label>
                     <input 
                       type="radio" 
                       name="quiz"
@@ -36,12 +36,27 @@ export default class InputForm extends Component {
                       checked={this.state.selected} 
                       onChange={this.props.handleChange} />
                     {elem}
-                  </label>
+                  </label>  */}
+                  {/* TESTING */}
                 </div>
               ))}
               <input className="button" type="submit" value="Submit" />
             </form>
           )}
+           <label>
+                  <input 
+                        type="radio"
+                        name="quiz"
+                        value="Pizza" />
+                        Pizza
+                        </label>
+                        <label>
+                  <input 
+                        type="radio"
+                        name="quiz"
+                        value="Pasta" />
+                        Pasta
+                        </label>
         </div>
 
       </div>
