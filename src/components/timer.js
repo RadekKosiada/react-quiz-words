@@ -6,13 +6,9 @@ export default function Timer(props) {
     <div id="timer-container">
       <div id="timer">
         {/* if time has only one digit */}
-        {props.timeApp < 10 && (
-          <p className="time">00:0{props.timeApp}</p>
-        )}
+        {props.timeApp < 10 && <p className="time">00:0{props.timeApp}</p>}
         {/* if time has two digits */}
-        {props.timeApp >= 10 && (
-          <p className="time">00:{props.timeApp}</p>
-        )}
+        {props.timeApp >= 10 && <p className="time">00:{props.timeApp}</p>}
         <p className="time-label">seconds left</p>
       </div>
     </div>

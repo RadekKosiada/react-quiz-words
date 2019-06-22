@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       allTasks: [],
-      correctAnswer: "", 
+      correctAnswer: "",
       selected: "",
       score: 0,
       currentRoundPoints: 1,
@@ -34,14 +34,13 @@ class App extends Component {
     this.countTime = this.countTime.bind(this);
   }
   componentDidMount() {
-    this.countTime();
     this.getWordQuiz();
-
   }
   async getWordQuiz() {
     try {
       const response = await fetch(
-        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level="+this.state.level,
+        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=" +
+          this.state.level,
         {
           method: "GET",
           headers: {
@@ -53,7 +52,9 @@ class App extends Component {
       );
       const data = await response.json();
       this.setState({ allTasks: data.quizlist });
-      console.log(data)
+      console.log(data);
+      //calling countTime here so the timer starts first when the data loads
+      this.countTime();
     } catch (err) {
       console.log(err.message);
     }
@@ -135,19 +136,18 @@ class App extends Component {
           answeredQuestions: 0,
           selected: "",
           showGameOverPopup: true,
-          correctAnswer: currentSet.option[currentSet.correct-1],
+          correctAnswer: currentSet.option[currentSet.correct - 1]
         });
         clearInterval(this.interval);
       }
     }
     //Winning the whole round
-    if(this.state.round === this.state.winCondition) {
+    if (this.state.round === this.state.winCondition) {
       // this.setState({
       //   showYouWonPopup: true
       // })
       this.displayYouWonPopup();
     }
-
   }
   countTime() {
     console.log(this.state.round, this.state.allTasks);
@@ -159,7 +159,7 @@ class App extends Component {
       if (this.state.time === 0) {
         clearInterval(this.interval);
         this.setState({
-          showGameOverPopup: true,
+          showGameOverPopup: true
           // correctAnswer: currentSet.option[currentSet.correct-1],
         });
       }
@@ -203,7 +203,7 @@ class App extends Component {
               />
             )}
           </div>
-          <Timer timeApp={this.state.time} />
+          <Timer timeApp={this.state.time} allTasks={this.state.allTasks} />
         </div>
 
         {this.state.showGameOverPopup && (
