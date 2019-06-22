@@ -25,8 +25,7 @@ export default class InputForm extends Component {
               ))}
             </p>
           )}
-
-          <p className="title">Your answer:</p>
+          <p className="title answer">Your answer:</p>
           {!currentSet && <p>Loading....</p>}
           {currentSet && (
             <form className="grid-form" onSubmit={this.props.handleSubmit}>

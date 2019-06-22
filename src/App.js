@@ -159,8 +159,8 @@ class App extends Component {
       if (this.state.time === 0) {
         clearInterval(this.interval);
         this.setState({
-          showGameOverPopup: true
-          // correctAnswer: currentSet.option[currentSet.correct-1],
+          showGameOverPopup: true,
+          correctAnswer: currentSet.option[currentSet.correct-1],
         });
       }
     }, 1000);

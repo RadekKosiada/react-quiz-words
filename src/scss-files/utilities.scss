@@ -9,10 +9,10 @@ $left-col-width-sm: 25vw;
 $left-col-width-xsm: 100px;
 $grid-gap: 20px;
 $input-height: 50px;
-$popup-width: 400px;
-$popup-height: 350px;
-$popup-height-sm: 250px;
+$popup-width: 350px;
+$popup-height: 250px;
 $popup-width-sm: 200px;
+$popup-height-sm: 250px;
 
 @mixin center-element() {
   position: absolute;

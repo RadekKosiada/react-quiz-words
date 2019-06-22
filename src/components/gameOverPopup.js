@@ -7,14 +7,27 @@ export default function GameOverPopup(props) {
     <div>
       <div className="overlay" />
       <div className="game-over">
-        <h4>Wrong</h4>
         {props.timeApp === 0 && (
-          <p>Too late!</p>
+          <div>
+            <h4>Too late!</h4>
+            <p>
+              The correct answer is:
+              <br />
+              <span className="title">{props.correctAnswer}</span>
+            </p>
+          </div>
         )}
-       
-          {props.timeApp > 0 && (<p>The correct answer is:<br />
-          <span className="title">{props.correctAnswer}</span>
-        </p>)}
+
+        {props.timeApp > 0 && (
+          <div>
+            <h4>Wrong</h4>
+            <p>
+              The correct answer is:
+              <br />
+              <span className="title">{props.correctAnswer}</span>
+            </p>
+          </div>
+        )}
         <RestartButton restartGamePopup={props.restartGameApp} />
       </div>
     </div>
