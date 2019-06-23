@@ -103,7 +103,7 @@ class App extends Component {
     // if no answer
     if (!this.state.selected) {
       this.setState({
-        errorMessage: "*Please choose one of the options"
+        errorMessage: "Please choose one of the options"
       });
     } else {
       //if correct answer
@@ -160,7 +160,7 @@ class App extends Component {
         clearInterval(this.interval);
         this.setState({
           showGameOverPopup: true,
-          correctAnswer: currentSet.option[currentSet.correct-1],
+          correctAnswer: currentSet.option[currentSet.correct - 1]
         });
       }
     }, 1000);
@@ -172,35 +172,43 @@ class App extends Component {
       alert = "input-alert";
     }
 
-    // if (currentQuestion) {
     return (
       <div className="App">
         <div className="main-container">
-          <div className="quiz-container">
-            <h1>Quiz</h1>
-            <h4>Choose one answer that matches all three following words</h4>
-            <div className="questions-container">
-              <p className="title">Round: </p>
-              <p>{this.state.round}</p>
-
-              <p className="title">Questions left: </p>
-              <p>{this.state.winCondition - this.state.answeredQuestions}</p>
-
-              <p className="title">Your score: </p>
-              <p>{this.state.score}</p>
-            </div>
-            <p className="error-message">{this.state.errorMessage}</p>
-            {this.state.allTasks && (
-              <InputForm
-                selected={this.state.selected}
-                round={this.state.round}
-                allTasks={this.state.allTasks}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-              />
-            )}
-          </div>
+        {/* first row */}
+          <h1 className="game-title">Quiz</h1>
           <Timer timeApp={this.state.time} allTasks={this.state.allTasks} />
+          {/* second row */}
+          <p className="round">
+            <span>Round: </span>
+            <span>{this.state.round}</span>
+          </p>
+
+          <p className="questions-left">
+            <span className="title">Questions: </span>
+            <span>
+              {this.state.winCondition - this.state.answeredQuestions}
+            </span>
+          </p>
+          <p className="score">
+            <span className="title">Score: </span>
+            <span>{this.state.score}</span>
+          </p>
+          {/* third row */}
+          <div className="instruction">
+            <p>Choose the best matching answer for following words within given time</p>
+            <p className="error-message">{this.state.errorMessage}</p>
+          </div>
+          {/* fourth row &  fifth row*/}
+          {this.state.allTasks && (
+            <InputForm
+              selected={this.state.selected}
+              round={this.state.round}
+              allTasks={this.state.allTasks}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
+          )}
         </div>
 
         {this.state.showGameOverPopup && (

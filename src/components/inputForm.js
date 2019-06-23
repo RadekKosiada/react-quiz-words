@@ -15,20 +15,24 @@ export default class InputForm extends Component {
     const currentSet = this.props.allTasks[this.props.round - 1];
     return (
       <div>
-        <div className="questions-container">
-          <p className="title">Words:</p>
-          {!currentSet && <p>Loading....</p>}
+        {/* fourth row */}
+        <div className="words">
+          {!currentSet && <p className="loading">Loading....</p>}
           {currentSet && (
             <p>
               {currentSet.quiz.map((elem, index) => (
-                <span className="single-word" key={index}>{elem} </span>
+                <span className="single-word" key={index}>
+                  {elem}
+                </span>
               ))}
             </p>
           )}
-          <p className="title answer">Your answer:</p>
-          {!currentSet && <p>Loading....</p>}
+        </div>
+        {/* fifth row */}
+        <div className="answer">
+          {!currentSet && <p className="loading">Loading....</p>}
           {currentSet && (
-            <form className="grid-form" onSubmit={this.props.handleSubmit}>
+            <form onSubmit={this.props.handleSubmit}>
               {currentSet.option.map((elem, index) => (
                 <div className="radio" key={index}>
                   <label>
