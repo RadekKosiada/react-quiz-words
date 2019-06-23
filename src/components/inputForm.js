@@ -33,7 +33,7 @@ export default class InputForm extends Component {
         </form>
       );
     } else {
-      return <p className="loading">Loading....</p>;
+      return <p className="loading-answers">Loading answers....</p>;
     }
 
     // <div className="words-container">

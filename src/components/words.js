@@ -22,7 +22,7 @@ export default class Words extends Component {
         </div>
       );
     } else {
-      return <p className="loading">Loading....</p>;
+      return <p className="loading-words">Loading words....</p>;
     }
   }
 }
