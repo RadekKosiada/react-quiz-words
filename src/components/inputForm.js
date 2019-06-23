@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../scss-files/App.scss";
 import "../scss-files/radioButton.scss";
-import axios from "axios";
 
 export default class InputForm extends Component {
   constructor(props) {
@@ -14,20 +13,22 @@ export default class InputForm extends Component {
   render() {
     const currentSet = this.props.allTasks[this.props.round - 1];
     return (
-      <div>
+      <div className="words-container">
         {/* fourth row */}
-        <div className="words">
-          {!currentSet && <p className="loading">Loading....</p>}
+          {!currentSet && (
+            <p className="loading">Loading....</p>)
+         }
+
           {currentSet && (
-            <p>
+            <div className="words">
               {currentSet.quiz.map((elem, index) => (
-                <span className="single-word" key={index}>
+                <p key={index}>
                   {elem}
-                </span>
+                </p>
               ))}
-            </p>
+            </div>
           )}
-        </div>
+       
         {/* fifth row */}
         <div className="answer">
           {!currentSet && <p className="loading">Loading....</p>}
