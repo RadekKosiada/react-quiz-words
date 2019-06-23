@@ -7,7 +7,7 @@ import InputForm from "./components/inputForm";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 5;
+const timeToAnswer = 99;
 
 class App extends Component {
   constructor(props) {
@@ -183,10 +183,7 @@ class App extends Component {
               <p className="title">Round: </p>
               <p>{this.state.round}</p>
 
-              <p className="title">Points for the current round: </p>
-              <p className="current-points">{this.state.currentRoundPoints}</p>
-
-              <p className="title">Questions left to win: </p>
+              <p className="title">Questions left: </p>
               <p>{this.state.winCondition - this.state.answeredQuestions}</p>
 
               <p className="title">Your score: </p>
