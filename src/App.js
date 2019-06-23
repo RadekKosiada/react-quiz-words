@@ -104,7 +104,7 @@ class App extends Component {
     // if no answer
     if (!this.state.selected) {
       this.setState({
-        errorMessage: "Please choose one of the options"
+        errorMessage: "*Please choose one of the options"
       });
     } else {
       //if correct answer
