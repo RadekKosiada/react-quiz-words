@@ -98,16 +98,17 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-input[type="submit"] {
+input[type="submit"], .button {
   border: 2px solid blue;
   background-color: white;
   height: 2.5vw;
   align-self: center;
   justify-self: center;
   width: 60%;
+  transition: 0.5s;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .button:hover {
   background-color: blue;
   color: white;
   cursor: pointer;
@@ -150,15 +151,4 @@ label {
   text-align: center;
   margin-top: 0;
   font-size: 0.75em;
-}
-
-.button {
-  display: inline-block;
-  width: 120px;
-  height: $input-height;
-  background-color: white;
-  @extend .border;
-  color: $main-font-color;
-  font-family: $font-family;
-  transition: 0.5s;
 }
