@@ -15,7 +15,7 @@ export default class InputForm extends Component {
 
     if (currentSet) {
       return (
-        <form className="answer" onSubmit={this.props.handleSubmit}>
+        <form className="answers" onSubmit={this.props.handleSubmit}>
           {currentSet.option.map((elem, index) => (
             <label className="radio" key={index}>
               <input
@@ -26,7 +26,7 @@ export default class InputForm extends Component {
                 onChange={this.props.handleChange}
               />
               <span className="checkmark" />
-              {elem}
+              <span className="single-answer">{elem}</span>
             </label>
           ))}
           <input className="button" type="submit" value="Submit" />

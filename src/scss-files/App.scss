@@ -87,13 +87,13 @@
   align-self: center;
 }
 
-.answer, .loading-answers {
+.answers, .loading-answers {
   grid-column: 1/4;
   grid-row: 5/6;
   text-align: center;
 }
 
-.answer {
+.answers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -150,4 +150,15 @@ label {
   text-align: center;
   margin-top: 0;
   font-size: 0.75em;
+}
+
+.button {
+  display: inline-block;
+  width: 120px;
+  height: $input-height;
+  background-color: white;
+  @extend .border;
+  color: $main-font-color;
+  font-family: $font-family;
+  transition: 0.5s;
 }

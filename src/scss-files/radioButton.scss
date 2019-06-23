@@ -12,17 +12,21 @@ input[type="radio"] {
   display: inline-block;
   height: 25px;
   width: 25px;
-  background-color: #ccc;;
+  background-color: #ccc;
   opacity: 0.75;
   border-radius: 50%;
   transition: 0.25s;
-  margin-right: -10px;
-  transform: translate(-20px, 6px);
+  transform: translate(-20px, 0);
 }
 
 .checkmark:hover {
   cursor: pointer;
   opacity: 1;
+}
+
+.single-answer {
+  display: inline-block;
+  transform: translate(0, -8px);
 }
 
 // when checked
