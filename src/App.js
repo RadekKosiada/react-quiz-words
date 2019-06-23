@@ -4,6 +4,7 @@ import "./scss-files/App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import InputForm from "./components/inputForm";
+import Words from "./components/words";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
@@ -199,8 +200,12 @@ class App extends Component {
             <p>Choose the best matching answer for following words within given time</p>
             <p className="error-message">{this.state.errorMessage}</p>
           </div>
-          {/* fourth row &  fifth row*/}
-          {this.state.allTasks && (
+          {/* fourth row */}
+          <Words 
+          allTasks={this.state.allTasks}
+          round={this.state.round}
+          />
+          {/* fifth row */}          
             <InputForm
               selected={this.state.selected}
               round={this.state.round}
@@ -208,7 +213,6 @@ class App extends Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
-          )}
         </div>
 
         {this.state.showGameOverPopup && (
