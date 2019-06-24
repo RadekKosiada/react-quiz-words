@@ -1,11 +1,13 @@
 @import "utilities";
 
 $main-color: blue;
+$background-color: white;
 $opacity-color: purple;
 $alert-color: red;
 $main-font-color: black;
+$overlay-color: purple;
 $main-font-size: 20px;
-$font-family: monospace, Arial;
+$font-family:'Space Mono', 'Anonymous Pro', monospace, 'Bubbler One', 'Quicksand', Arial, sans-serif;
 $left-col-width: 175px;
 $left-col-width-sm: 25vw;
 $left-col-width-xsm: 100px;
@@ -23,24 +25,29 @@ $popup-height-sm: 250px;
   transform: translate(-50%, -50%);
 }
 
+@mixin center-grid() {
+  align-self: center;
+  text-align: center;
+}
+
 .border {
   border: 2px solid $main-color;
 }
 
 * {
-  font-family: 'Space Mono', 'Anonymous Pro', monospace, 'Bubbler One', 'Quicksand', Arial, sans-serif;
+  font-family: $font-family;
 }
 .App {
   display: block;
   width: 40%;
-  margin: 0 auto;
-  position: absolute;
-  top: 30%;
-  left: 50%;
+  @include center-element();  
+  top: 30%;  
   transform: translate(-50%, -30%);
 }
 
-.title { font-weight: bold;}
+.title { 
+  font-weight: bold;
+}
 
 .main-container {
   display: grid;
@@ -51,57 +58,55 @@ $popup-height-sm: 250px;
 .game-title{
   grid-column: 1/2;
   grid-row: 1;
-  align-self: center;
-  text-align: center;
+  @include center-grid();  
 }
 
 .timer-container {
   grid-column: 3/4;
   grid-row: 1/2;
-  border: 2px solid blue;
+  @extend .border;
   display: grid;
 }
 
 .timer-container h2 {
-  align-self: center;
-  text-align: center; 
+  @include center-grid();  
 }
 
 .round {
   grid-column: 1/2;
   grid-row: 2/3;
-  align-self: center;
-  text-align: center;
+  @include center-grid();  
 }
 
 .questions-left {
   grid-column: 2/3;
   grid-row: 2/3;
-  align-self: center;
-  text-align: center;
+  @include center-grid();  
 }
 
 .score {
   grid-column: 3/4;
   grid-row: 2/3;
-  align-self: center;
-  text-align: center;
+  @include center-grid();  
 
 }
 
 .instruction {
   grid-column: 1/4;
+  height: 100%;
   grid-row: 3/4;
   text-align: center;
-  border-top: 2px solid blue; 
-  border-bottom: 2px solid blue;
+  @include center-grid();  
+  border-top: 2px solid $main-color;
 }
+
+
 
 .words, .loading-words {
   grid-column: 1/4;
   grid-row: 4/5;
   text-align: center;
-  color: blue; 
+  color: $main-color; 
   font-weight: bold;
 }
 
@@ -126,8 +131,8 @@ $popup-height-sm: 250px;
 }
 
 input[type="submit"], .button {
-  border: 2px solid blue;
-  background-color: white;
+  @extend .border;  
+  background-color: $background-color;
   height: 2.5vw;
   align-self: center;
   justify-self: center;
@@ -136,14 +141,13 @@ input[type="submit"], .button {
 }
 
 input[type="submit"]:hover, .button:hover {
-  background-color: blue;
-  color: white;
+  background-color: $main-color;
+  color: $background-color;
   cursor: pointer;
 }
 
 label {  
-  text-align: center;
-  align-self: center;
+  @include center-grid();
 }
 
 .overlay {
@@ -151,10 +155,10 @@ label {
   top: 0;
   left: 0;
   z-index: 5;
-  background-color: purple;
+  background-color: $overlay-color;
   width: 100%;
   height: 100%;
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 .game-over {
@@ -163,10 +167,10 @@ label {
   height: $popup-height;
   z-index: 10;
   @include center-element();
-  color: white;
+  color: $background-color;
   text-align: center;
   background-color: grey;
-  border: 3px solid white;
+  border: 3px solid $background-color;
   text-transform: uppercase;
   opacity: 1;
   font-size: 25px;

@@ -181,7 +181,7 @@ class App extends Component {
           <Timer timeApp={this.state.time} allTasks={this.state.allTasks} />
           {/* second row */}
           <p className="round">
-            <span>Round: </span>
+            <span className="title">Round: </span>
             <span>{this.state.round}</span>
           </p>
 
