@@ -66,8 +66,6 @@
   border-top: 2px solid $main-color;
 }
 
-
-
 .words, .loading-words {
   grid-column: 1/4;
   grid-row: 4/5;
@@ -96,7 +94,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-input[type="submit"], .button {
+.button {
   @extend .border;  
   background-color: $background-color;
   height: 2.5vw;
@@ -106,7 +104,7 @@ input[type="submit"], .button {
   transition: 0.5s;
 }
 
-input[type="submit"]:hover, .button:hover {
+.button:hover {
   background-color: $main-color;
   color: $background-color;
   cursor: pointer;
@@ -137,7 +135,7 @@ label {
   text-align: center;
   background-color: grey;
   border: 3px solid $background-color;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   opacity: 1;
   font-size: 25px;
   padding: 0 10px;
