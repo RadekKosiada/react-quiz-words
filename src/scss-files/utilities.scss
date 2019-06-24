@@ -1,1 +1,28 @@
 $main-color: blue;
+$background-color: white;
+$opacity-color: purple;
+$alert-color: red;
+$main-font-color: black;
+$overlay-color: purple;
+$main-font-size: 20px;
+$font-family:'Space Mono', 'Anonymous Pro', monospace, 'Bubbler One', 'Quicksand', Arial, sans-serif;
+$popup-width: 350px;
+$popup-height: 250px;
+$popup-width-sm: 200px;
+$popup-height-sm: 250px;
+
+@mixin center-element() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center-grid() {
+  align-self: center;
+  text-align: center;
+}
+
+.border {
+  border: 2px solid $main-color;
+}
