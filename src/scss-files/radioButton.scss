@@ -10,13 +10,13 @@ input[type="radio"] {
 
 .checkmark {
   display: inline-block;
-  height: 25px;
-  width: 25px;
-  background-color: #ccc;
+  height: 21px;
+  width: 21px;
+  background-color: $grey-shade;
   opacity: 0.75;
   border-radius: 50%;
   transition: 0.25s;
-  transform: translate(-20px, 0);
+  transform: translate(-10px, 0);
 }
 
 .checkmark:hover {
@@ -26,13 +26,12 @@ input[type="radio"] {
 
 .single-answer {
   display: inline-block;
-  transform: translate(0, -8px);
+  transform: translate(0, -6px);
 }
 
 // when checked
 label input:checked ~ .checkmark {
   background-color: $main-color;
-  opacity: 1;
 }
 
 // create a dot in the middle
@@ -49,10 +48,10 @@ label input:checked ~ .checkmark:after {
 
 // styling the dot
 label .checkmark:after {
-  top: 7px;
-  left: 7px;
+  top: 5px;
+  left: 5px;
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: white;
+  background: $background-color;
 }
