@@ -7,7 +7,7 @@ export default function YouWonPopup(props) {
     <div>
       <div className="overlay" />
       <div className="game-over">
-        <h4>Congrats, you Won!</h4>
+        <h4>Congrats, you won!</h4>
         <p>Your score counts {props.scoreFromApp}</p>
         <RestartButton restartGamePopup={props.restartGameApp} />
       </div>

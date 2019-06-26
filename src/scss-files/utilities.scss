@@ -24,6 +24,6 @@ $popup-height-sm: 250px;
   text-align: center;
 }
 
-.border {
+@mixin border() {
   border: 2px solid $main-color;
 }

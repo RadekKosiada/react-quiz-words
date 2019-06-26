@@ -116,3 +116,10 @@
     left: 95%;
   }
 }
+
+@media (max-width: 1100px) {
+ #blue-circle {
+    display: none;
+  }
+
+}

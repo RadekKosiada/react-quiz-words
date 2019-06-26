@@ -1,11 +1,12 @@
 @import "utilities";
+@import "media-queries";
 
 * {
   font-family: $font-family;
 }
 .App {
   display: block;
-  width: 40%;
+  width: 60%;
   @include center-element();  
   top: 30%;  
   transform: translate(-50%, -30%);
@@ -15,89 +16,24 @@
   font-weight: bold;
 }
 
-.main-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 5vw;
-}
-
-.game-title{
-  grid-column: 1/2;
-  grid-row: 1;
-  @include center-grid();  
-}
-
-.timer-container {
-  grid-column: 3/4;
-  grid-row: 1/2;
-  @extend .border;
-  display: grid;
-}
-
 .timer-container h2 {
   @include center-grid();  
 }
 
-.round {
-  grid-column: 1/2;
-  grid-row: 2/3;
-  @include center-grid();  
+h2.time {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.questions-left {
-  grid-column: 2/3;
-  grid-row: 2/3;
-  @include center-grid();  
-}
-
-.score {
-  grid-column: 3/4;
-  grid-row: 2/3;
-  @include center-grid();  
-
-}
-
-.instruction {
-  grid-column: 1/4;
-  height: 100%;
-  grid-row: 3/4;
-  text-align: center;
-  @include center-grid();  
-  border-top: 2px solid $main-color;
-}
-
-.words, .loading-words {
-  grid-column: 1/4;
-  grid-row: 4/5;
-  text-align: center;
-  color: $main-color; 
-  font-weight: bold;
-}
-
-.words {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
 
 .words p {
   align-self: center;
 }
 
-.answers, .loading-answers {
-  grid-column: 1/4;
-  grid-row: 5/6;
-  text-align: center;
-}
-
-.answers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
 
 .button {
-  @extend .border;  
+  @include border();
   background-color: $background-color;
-  height: 2.5vw;
   align-self: center;
   justify-self: center;
   width: 60%;
@@ -127,15 +63,12 @@ label {
 
 .game-over {
   display: block;
-  width: $popup-width;
-  height: $popup-height;
   z-index: 10;
   @include center-element();
   color: $background-color;
   text-align: center;
   background-color: grey;
   border: 3px solid $background-color;
-  // text-transform: uppercase;
   opacity: 1;
   font-size: 25px;
   padding: 0 10px;
