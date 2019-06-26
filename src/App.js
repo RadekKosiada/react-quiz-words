@@ -7,7 +7,7 @@ import Words from "./components/words";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 150;
+const timeToAnswer = 15;
 
 class App extends Component {
   constructor(props) {
