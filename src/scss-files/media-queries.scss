@@ -226,6 +226,7 @@
 }
 
 @media (max-width: 450px) {
+
   .main-container {
     grid-auto-rows: 12vw;
     grid-row-gap: 10px;
@@ -235,6 +236,6 @@
 @media (max-width: 391px) {
   .main-container {
     grid-auto-rows: 15vw;
-    grid-row-gap: 20px;
+    grid-row-gap: 25px;
   }
 }
