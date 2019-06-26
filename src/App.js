@@ -175,12 +175,13 @@ class App extends Component {
     return (
       <div className="App">
         <div className="main-container">
-        {/* first row */}
+          {/* first row */}
           <h1 className="game-title">Quiz</h1>
-          <Timer 
-            timeApp={this.state.time} 
+          <Timer
+            timeApp={this.state.time}
             allTasks={this.state.allTasks}
-            round={this.state.round} />
+            round={this.state.round}
+          />
           {/* second row */}
           <p className="round">
             <span className="title">Round: </span>
@@ -199,22 +200,22 @@ class App extends Component {
           </p>
           {/* third row */}
           <div className="instruction">
-            <p>Choose the best matching answer for following words within given time</p>
+            <p>
+              Choose the best matching answer for following words within given
+              time
+            </p>
             <p className="error-message">{this.state.errorMessage}</p>
           </div>
           {/* fourth row */}
-          <Words 
-          allTasks={this.state.allTasks}
-          round={this.state.round}
+          <Words allTasks={this.state.allTasks} round={this.state.round} />
+          {/* fifth row */}
+          <InputForm
+            selected={this.state.selected}
+            round={this.state.round}
+            allTasks={this.state.allTasks}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
           />
-          {/* fifth row */}          
-            <InputForm
-              selected={this.state.selected}
-              round={this.state.round}
-              allTasks={this.state.allTasks}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-            />
         </div>
 
         {this.state.showGameOverPopup && (

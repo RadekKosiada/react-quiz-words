@@ -106,6 +106,7 @@
     @include center-grid();
     border-top: 2px solid $main-color;
   }
+
 }
 // /////////////////////////////////////////
 @media (max-width: 1100px) {
@@ -210,6 +211,10 @@
   .game-over {
     width: $popup-width;
     height: $popup-height;
+  }
+
+  .starting {
+    font-size: 0.75em;
   }
 }
 

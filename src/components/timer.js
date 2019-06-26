@@ -3,7 +3,7 @@ import "../scss-files/App.scss";
 
 export default function Timer(props) {
   const currentSet = props.allTasks[props.round - 1];
-  if(currentSet) {
+  if (currentSet) {
     return (
       <div className="timer-container">
         {/* if time has only one digit */}
@@ -15,9 +15,8 @@ export default function Timer(props) {
   } else {
     return (
       <div className="timer-container">
-        <h2>Starting game...</h2>
+        <h2 className="starting">Starting...</h2>
       </div>
-    )
+    );
   }
- 
 }
