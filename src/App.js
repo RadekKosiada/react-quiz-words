@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./scss-files/App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
@@ -8,7 +7,7 @@ import Words from "./components/words";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
-const timeToAnswer = 15;
+const timeToAnswer = 150;
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class App extends Component {
       selected: "",
       score: 0,
       currentRoundPoints: 1,
-      errorMessage: "",
+      errorMessage: false,
       round: 1,
       showGameOverPopup: false,
       showYouWonPopup: false,
@@ -53,7 +52,6 @@ class App extends Component {
       );
       const data = await response.json();
       this.setState({ allTasks: data.quizlist });
-      console.log(data);
       //calling countTime here so the timer starts first when the data loads
       this.countTime();
     } catch (err) {
@@ -71,7 +69,7 @@ class App extends Component {
       time: timeToAnswer,
       currentRoundPoints: 1,
       answeredQuestions: 0,
-      errorMessage: ""
+      errorMessage: false
     });
     this.getWordQuiz();
   }
@@ -84,7 +82,7 @@ class App extends Component {
   handleChange(event) {
     this.setState({
       selected: event.target.value,
-      errorMessage: ""
+      errorMessage: false
     });
   }
   handleSubmit(event) {
@@ -103,7 +101,7 @@ class App extends Component {
     // if no answer
     if (!this.state.selected) {
       this.setState({
-        errorMessage: "*Please choose one of the options"
+        errorMessage: true
       });
     } else {
       //if correct answer
@@ -111,7 +109,7 @@ class App extends Component {
         this.setState({
           currentRoundPoints: this.state.currentRoundPoints * 2,
           round: this.state.round + 1,
-          errorMessage: "",
+          errorMessage: false,
           answeredQuestions: this.state.answeredQuestions + 1,
           time: timeToAnswer,
           selected: ""
@@ -132,7 +130,7 @@ class App extends Component {
         this.setState({
           score: 0,
           round: this.state.round,
-          errorMessage: "",
+          errorMessage: false,
           answeredQuestions: 0,
           selected: "",
           showGameOverPopup: true,
@@ -150,7 +148,6 @@ class App extends Component {
     }
   }
   countTime() {
-    console.log(this.state.round, this.state.allTasks);
     const currentSet = this.state.allTasks[this.state.round - 1];
     this.interval = setInterval(() => {
       this.setState({
@@ -166,11 +163,6 @@ class App extends Component {
     }, 1000);
   }
   render() {
-    const currentSet = this.state.allTasks[this.state.round - 1];
-    let alert = "";
-    if (this.state.errorMessage) {
-      alert = "input-alert";
-    }
 
     return (
       <div className="App">
@@ -215,6 +207,7 @@ class App extends Component {
             allTasks={this.state.allTasks}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            errorMessage={this.state.errorMessage}
           />
         </div>
 

@@ -1,53 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 import "../scss-files/App.scss";
 import "../scss-files/radioButton.scss";
 
-export default class InputForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+export default function InputForm(props) {
+  const currentSet = props.allTasks[props.round - 1];
+  let alert = "";
+  if (props.errorMessage) {
+    alert = "input-alert";
   }
-  componentDidMount() {
-    console.log(this.props.round, this.props.allTasks);
-  }
-  render() {
-    const currentSet = this.props.allTasks[this.props.round - 1];
 
-    if (currentSet) {
-      return (
-        <form className="answers" onSubmit={this.props.handleSubmit}>
-          {currentSet.option.map((elem, index) => (
-            <label className="radio" key={index}>
-              <input
-                type="radio"
-                name="quiz"
-                value={index}
-                checked={this.state.selected}
-                onChange={this.props.handleChange}
-              />
-              <span className="checkmark" />
-              <span className="single-answer">{elem}</span>
-            </label>
-          ))}
-          <input className="button" type="submit" value="Submit" />
-        </form>
-      );
-    } else {
-      return <p className="loading-answers">Loading answers....</p>;
-    }
-
-    // <div className="words-container">
-    //   {/* fourth row */}
-    //     {!currentSet && (
-    //       <p className="loading">Loading....</p>)
-    //    }
-
-    //     {currentSet && (
-
-    //     )}
-
-    //   {/* fifth row */}
-
-    // </div>
+  if (currentSet) {
+    return (
+      <form className="answers" onSubmit={props.handleSubmit}>
+        {currentSet.option.map((elem, index) => (
+          <label className="radio" key={index}>
+            <input
+              type="radio"
+              name="quiz"
+              value={index}
+              // checked={this.props.selected}
+              onChange={props.handleChange}
+            />
+            <span className={"checkmark" + alert} />
+            <span className="single-answer">{elem}</span>
+          </label>
+        ))}
+        <input className="button" type="submit" value="Submit" />
+      </form>
+    );
+  } else {
+    return <p className="loading-answers">Loading answers....</p>;
   }
 }
