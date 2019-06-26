@@ -177,7 +177,10 @@ class App extends Component {
         <div className="main-container">
         {/* first row */}
           <h1 className="game-title">Quiz</h1>
-          <Timer timeApp={this.state.time} allTasks={this.state.allTasks} />
+          <Timer 
+            timeApp={this.state.time} 
+            allTasks={this.state.allTasks}
+            round={this.state.round} />
           {/* second row */}
           <p className="round">
             <span className="title">Round: </span>
