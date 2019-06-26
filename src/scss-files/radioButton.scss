@@ -59,6 +59,7 @@ label .checkmark:after {
 //when no answer, but user clicks submit
 .input-alert {
   background-color: $alert-color;
+  animation: alert 1.5s ease-in infinite;
 }
 
 label .input-alert:after {
@@ -69,4 +70,10 @@ label .input-alert:after {
   height: 11px;
   border-radius: 50%;
   background: $background-color;
+}
+
+@keyframes alert {
+  50% {
+    opacity: 0;
+  }
 }
