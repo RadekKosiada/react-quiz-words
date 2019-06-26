@@ -59,7 +59,6 @@ class App extends Component {
     }
   }
   restartGame() {
-    console.log("fired");
     this.setState({
       showGameOverPopup: false,
       showYouWonPopup: false,
@@ -93,11 +92,6 @@ class App extends Component {
       selectedNumber
     ].checked = false;
     event.preventDefault();
-    console.log(
-      typeof selectedNumber,
-      typeof this.state.selected,
-      "handleSubmit"
-    );
     // if no answer
     if (!this.state.selected) {
       this.setState({
@@ -124,7 +118,6 @@ class App extends Component {
             score: this.state.score * 2
           });
         }
-        console.log("YAYAYAY!");
         // if wrong answer
       } else {
         this.setState({

@@ -18,7 +18,6 @@ export default function InputForm(props) {
               type="radio"
               name="quiz"
               value={index}
-              // checked={this.props.selected}
               onChange={props.handleChange}
             />
             <span className={"checkmark " + alert} />
