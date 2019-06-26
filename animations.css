@@ -60,18 +60,6 @@
   }
 }
 
-/* animation for current points */
-.current-points {
-  opacity: 0;
-  animation: pulsing-points 2.5s infinite;
-}
-
-@keyframes pulsing-points {
-  50% {
-    opacity: 1;
-  }
-}
-
 #yellow-circle {
   z-index: -1;
   opacity: 0;
