@@ -1,20 +1,23 @@
 import React from "react";
-import "../App.scss";
+import "../scss-files/App.scss";
 
 export default function Timer(props) {
-  return (
-    <div id="timer-container">
-      <div id="timer">
+  const currentSet = props.allTasks[props.round - 1];
+  if(currentSet) {
+    return (
+      <div className="timer-container">
         {/* if time has only one digit */}
-        {props.timeApp < 10 && (
-          <p className="time">00:0{props.timeApp}</p>
-        )}
+        {props.timeApp < 10 && <h2 className="time">00:0{props.timeApp}</h2>}
         {/* if time has two digits */}
-        {props.timeApp >= 10 && (
-          <p className="time">00:{props.timeApp}</p>
-        )}
-        <p className="time-label">seconds left</p>
+        {props.timeApp >= 10 && <h2 className="time">00:{props.timeApp}</h2>}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="timer-container">
+        <h2>Starting game...</h2>
+      </div>
+    )
+  }
+ 
 }

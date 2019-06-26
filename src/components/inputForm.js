@@ -1,50 +1,53 @@
 import React, { Component } from "react";
-import "../App.scss";
-import axios from "axios";
+import "../scss-files/App.scss";
+import "../scss-files/radioButton.scss";
 
 export default class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    
   }
   componentDidMount() {
     console.log(this.props.round, this.props.allTasks);
   }
   render() {
     const currentSet = this.props.allTasks[this.props.round - 1];
-    return (
-      <div>
-        <div>
-          <p className="title">Words:</p>
-          {!currentSet && (<p>Loading....</p>)}
-          {currentSet && (<p>{currentSet.quiz.map((elem, index) => (
-          <span key={index}>{elem} </span>
-          ))}</p>)}
 
-          <p className="title">Your answer:</p>
-          {!currentSet && (<p>Loading....</p>)}
-          {currentSet && (
-            <form className="" onSubmit={this.props.handleSubmit}>
-              {currentSet.option.map((elem, index) => (
-                <div className="radio" key={index}>
-                  <label>
-                    <input 
-                      type="radio" 
-                      name="quiz"
-                      value={index} 
-                      checked={this.state.selected} 
-                      onChange={this.props.handleChange} />
-                    {elem}
-                  </label>
-                </div>
-              ))}
-              <input className="button" type="submit" value="Submit" />
-            </form>
-          )}
-        </div>
+    if (currentSet) {
+      return (
+        <form className="answers" onSubmit={this.props.handleSubmit}>
+          {currentSet.option.map((elem, index) => (
+            <label className="radio" key={index}>
+              <input
+                type="radio"
+                name="quiz"
+                value={index}
+                checked={this.state.selected}
+                onChange={this.props.handleChange}
+              />
+              <span className="checkmark" />
+              <span className="single-answer">{elem}</span>
+            </label>
+          ))}
+          <input className="button" type="submit" value="Submit" />
+        </form>
+      );
+    } else {
+      return <p className="loading-answers">Loading answers....</p>;
+    }
 
-      </div>
-    );
+    // <div className="words-container">
+    //   {/* fourth row */}
+    //     {!currentSet && (
+    //       <p className="loading">Loading....</p>)
+    //    }
+
+    //     {currentSet && (
+
+    //     )}
+
+    //   {/* fifth row */}
+
+    // </div>
   }
 }

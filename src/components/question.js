@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.scss";
+import "../scss-files/App.scss";
 import axios from "axios";
 
 export default class Question extends Component {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.scss";
+import "../scss-files/App.scss";
 
 export default function RestartButton(props) {
   return (

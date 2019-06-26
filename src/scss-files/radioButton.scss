@@ -1,0 +1,57 @@
+@import "utilities";
+
+input[type="radio"] {
+  opacity: 0;
+}
+
+.radio {
+  display: inline-block;
+}
+
+.checkmark {
+  display: inline-block;
+  height: 21px;
+  width: 21px;
+  background-color: $grey-shade;
+  opacity: 0.75;
+  border-radius: 50%;
+  transition: 0.25s;
+  transform: translate(-10px, 0);
+}
+
+.checkmark:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.single-answer {
+  display: inline-block;
+  transform: translate(0, -6px);
+}
+
+// when checked
+label input:checked ~ .checkmark {
+  background-color: $main-color;
+}
+
+// create a dot in the middle
+.checkmark:after {
+  content: "";
+  position: relative;
+  display: none;
+}
+
+// Show the dot when checked
+label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+// styling the dot
+label .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: $background-color;
+}

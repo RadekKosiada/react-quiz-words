@@ -1,10 +1,10 @@
-// Ctrl Shift F
 import React, { Component } from "react";
 import axios from "axios";
-import "./App.scss";
+import "./scss-files/App.scss";
 import GameOverPopup from "./components/gameOverPopup";
 import YouWonPopup from "./components/youWonPopup";
 import InputForm from "./components/inputForm";
+import Words from "./components/words";
 import Timer from "./components/timer";
 import secrets from "./secrets.json";
 
@@ -14,13 +14,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // OLD
-      allQuestions: [],
+      allTasks: [],
       correctAnswer: "",
-      category: "",
-      questionId: 0,
-      question: "",
-      questionValue: 0,
       selected: "",
       score: 0,
       currentRoundPoints: 1,
@@ -31,10 +26,7 @@ class App extends Component {
       time: timeToAnswer,
       winCondition: 10,
       answeredQuestions: 0,
-      level: 5,
-      //NEW
-      allTasks: [],
-      data: []
+      level: 5
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,13 +35,13 @@ class App extends Component {
     this.countTime = this.countTime.bind(this);
   }
   componentDidMount() {
-    this.countTime();
     this.getWordQuiz();
   }
   async getWordQuiz() {
     try {
       const response = await fetch(
-        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level="+this.state.level,
+        "https://twinword-word-association-quiz.p.rapidapi.com/type1/?area=sat&level=" +
+          this.state.level,
         {
           method: "GET",
           headers: {
@@ -61,7 +53,9 @@ class App extends Component {
       );
       const data = await response.json();
       this.setState({ allTasks: data.quizlist });
-      console.log(this.state.allTasks)
+      console.log(data);
+      //calling countTime here so the timer starts first when the data loads
+      this.countTime();
     } catch (err) {
       console.log(err.message);
     }
@@ -80,7 +74,6 @@ class App extends Component {
       errorMessage: ""
     });
     this.getWordQuiz();
-    this.countTime();
   }
   displayYouWonPopup() {
     this.setState({
@@ -143,21 +136,22 @@ class App extends Component {
           answeredQuestions: 0,
           selected: "",
           showGameOverPopup: true,
-          correctAnswer: currentSet.option[currentSet.correct-1]
+          correctAnswer: currentSet.option[currentSet.correct - 1]
         });
         clearInterval(this.interval);
       }
     }
     //Winning the whole round
-    if(this.state.round === this.state.winCondition) {
+    if (this.state.round === this.state.winCondition) {
       // this.setState({
       //   showYouWonPopup: true
       // })
       this.displayYouWonPopup();
     }
-
   }
   countTime() {
+    console.log(this.state.round, this.state.allTasks);
+    const currentSet = this.state.allTasks[this.state.round - 1];
     this.interval = setInterval(() => {
       this.setState({
         time: this.state.time - 1
@@ -165,50 +159,62 @@ class App extends Component {
       if (this.state.time === 0) {
         clearInterval(this.interval);
         this.setState({
-          showGameOverPopup: true
+          showGameOverPopup: true,
+          correctAnswer: currentSet.option[currentSet.correct - 1]
         });
       }
     }, 1000);
   }
   render() {
     const currentSet = this.state.allTasks[this.state.round - 1];
-    // console.log(this.state.allTasks[this.state.round - 1])
     let alert = "";
     if (this.state.errorMessage) {
       alert = "input-alert";
     }
 
-    // if (currentQuestion) {
     return (
       <div className="App">
         <div className="main-container">
-          <div className="quiz-container">
-            <h1>Quiz</h1>
-            <div className="questions-container">
-              <p className="title">Round: </p>
-              <p>{this.state.round}</p>
+        {/* first row */}
+          <h1 className="game-title">Quiz</h1>
+          <Timer 
+            timeApp={this.state.time} 
+            allTasks={this.state.allTasks}
+            round={this.state.round} />
+          {/* second row */}
+          <p className="round">
+            <span className="title">Round: </span>
+            <span>{this.state.round}</span>
+          </p>
 
-              <p className="title">Points for the current round: </p>
-              <p className="current-points">{this.state.currentRoundPoints}</p>
-
-              <p className="title">Questions left to win: </p>
-              <p>{this.state.winCondition - this.state.answeredQuestions}</p>
-
-              <p className="title">Your score: </p>
-              <p>{this.state.score}</p>
-            </div>
+          <p className="questions-left">
+            <span className="title">Questions: </span>
+            <span>
+              {this.state.winCondition - this.state.answeredQuestions}
+            </span>
+          </p>
+          <p className="score">
+            <span className="title">Score: </span>
+            <span>{this.state.score}</span>
+          </p>
+          {/* third row */}
+          <div className="instruction">
+            <p>Choose the best matching answer for following words within given time</p>
             <p className="error-message">{this.state.errorMessage}</p>
-            {this.state.allTasks && (
-              <InputForm
-                selected={this.state.selected}
-                round={this.state.round}
-                allTasks={this.state.allTasks}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-              />
-            )}
           </div>
-          <Timer timeApp={this.state.time} />
+          {/* fourth row */}
+          <Words 
+          allTasks={this.state.allTasks}
+          round={this.state.round}
+          />
+          {/* fifth row */}          
+            <InputForm
+              selected={this.state.selected}
+              round={this.state.round}
+              allTasks={this.state.allTasks}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
         </div>
 
         {this.state.showGameOverPopup && (
