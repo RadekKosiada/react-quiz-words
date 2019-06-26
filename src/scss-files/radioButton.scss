@@ -10,8 +10,8 @@ input[type="radio"] {
 
 .checkmark {
   display: inline-block;
-  height: 21px;
-  width: 21px;
+  height: $checkmark-size;
+  width: $checkmark-size;
   background-color: $grey-shade;
   opacity: 0.75;
   border-radius: 50%;
@@ -48,6 +48,21 @@ label input:checked ~ .checkmark:after {
 
 // styling the dot
 label .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: $background-color;
+}
+
+//when no answer, but user clicks submit
+.input-alert {
+  background-color: $alert-color;
+}
+
+label .input-alert:after {
+  display: block;
   top: 5px;
   left: 5px;
   width: 11px;

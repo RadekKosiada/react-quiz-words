@@ -21,7 +21,7 @@ export default function InputForm(props) {
               // checked={this.props.selected}
               onChange={props.handleChange}
             />
-            <span className={"checkmark" + alert} />
+            <span className={"checkmark " + alert} />
             <span className="single-answer">{elem}</span>
           </label>
         ))}
